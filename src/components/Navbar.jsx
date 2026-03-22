@@ -25,16 +25,18 @@ const Navbar = () => {
   return (
     <nav>
       <div className="container nav-inner">
-        <Link to="/" className="nav-logo" style={{ gap: '12px', display: 'flex', alignItems: 'center', height: '100%', flexShrink: 0 }}>
-          <div className="logo-icon h-full flex items-center" style={{ height: '60px' }}>
+        <Link to="/" className="nav-logo" style={{ gap: '12px', display: 'flex', alignItems: 'center' }}>
+          <div className="logo-icon flex items-center justify-center p-1 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20" style={{ height: '44px', width: '44px', overflow: 'hidden' }}>
             <img 
               src={`${import.meta.env.BASE_URL}logo_brand.png`} 
               alt="Campus IQ" 
-              className="h-full w-auto object-contain"
-              style={{ maxHeight: '100%' }}
+              className="h-full w-full object-contain" 
             />
           </div>
-          <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-[0.2em] hidden sm:block">Every Space Matter</span>
+          <div className="flex flex-col">
+            <span className="text-lg font-black text-indigo-900 tracking-tight leading-none uppercase">Campus IQ</span>
+            <span className="text-[9px] font-black text-indigo-400 uppercase tracking-[0.15em] mt-1">Every Space Matter</span>
+          </div>
         </Link>
 
         <ul className={`nav-links ${isOpen ? 'open' : ''}`}>
