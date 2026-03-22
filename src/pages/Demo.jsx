@@ -60,7 +60,6 @@ const Demo = () => {
   const [statusFilter, setStatusFilter] = useState('all');
 
   // Booking modal
-  const [selectedRoom, setSelectedRoom] = useState(null);
   const [bookingForm, setBookingForm] = useState({
     name: user?.name || 'Guest',
     rollNumber: '',
@@ -69,6 +68,7 @@ const Demo = () => {
     end: '12:00 PM',
     purpose: '',
     purposeOther: '',
+    seats: 1,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(null);
@@ -150,6 +150,7 @@ const Demo = () => {
         date: bookingDate,
         time: bookingTime,
         purpose: finalPurpose,
+        seats: parseInt(bookingForm.seats) || 1,
         status: 'pending',
         timestamp: serverTimestamp(),
       };
@@ -1014,27 +1015,59 @@ const Demo = () => {
                 />
               </div>
 
-              {/* Date */}
-              <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
-                  Date
-                </label>
-                <input
-                  type="date"
-                  value={bookingForm.date}
-                  onChange={(e) => setBookingForm({ ...bookingForm, date: e.target.value })}
-                  required
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    border: '1.5px solid #E2E8F0',
-                    borderRadius: '10px',
-                    fontSize: '0.9rem',
-                    fontFamily: 'inherit',
-                    outline: 'none',
-                    boxSizing: 'border-box',
-                  }}
-                />
+              {/* Date & Seats */}
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gap: '12px',
+                  marginBottom: '16px',
+                }}
+              >
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
+                    Date
+                  </label>
+                  <input
+                    type="date"
+                    value={bookingForm.date}
+                    onChange={(e) => setBookingForm({ ...bookingForm, date: e.target.value })}
+                    required
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      border: '1.5px solid #E2E8F0',
+                      borderRadius: '10px',
+                      fontSize: '0.9rem',
+                      fontFamily: 'inherit',
+                      outline: 'none',
+                      boxSizing: 'border-box',
+                    }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
+                    No. of Seats
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    max={selectedRoom.capacity}
+                    value={bookingForm.seats}
+                    onChange={(e) => setBookingForm({ ...bookingForm, seats: e.target.value })}
+                    required
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      border: '1.5px solid #E2E8F0',
+                      borderRadius: '10px',
+                      fontSize: '0.9rem',
+                      fontFamily: 'inherit',
+                      outline: 'none',
+                      boxSizing: 'border-box',
+                    }}
+                  />
+                </div>
               </div>
 
               {/* Time */}
