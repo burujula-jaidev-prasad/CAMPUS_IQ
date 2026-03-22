@@ -268,7 +268,7 @@ const Admin = () => {
       <aside className="admin-sidebar">
         <div className="sidebar-logo" style={{ marginBottom: '16px', padding: '0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <div className="logo-icon" style={{ background: 'transparent', width: '260px', height: '250px', margin: '0' }}>
-            <img src="/logo.png" alt="Campus IQ" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Campus IQ" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
           <div style={{ marginTop: '-40px', textAlign: 'center' }}>
             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '1px' }}>Every Space Matter</span>

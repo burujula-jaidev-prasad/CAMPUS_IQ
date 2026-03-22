@@ -271,7 +271,7 @@ const Chatbot = ({ rooms }) => {
           }}
         >
           <img
-            src="/tania.png"
+            src={`${import.meta.env.BASE_URL}tania.png`}
             alt="Tanya"
             style={{
               width: '130%',
@@ -355,7 +355,7 @@ const Chatbot = ({ rooms }) => {
               }}
             >
               <img
-                src="/tania.png"
+                src={`${import.meta.env.BASE_URL}tania.png`}
                 alt="Tanya"
                 style={{
                   width: '130%',

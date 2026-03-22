@@ -27,7 +27,7 @@ const Navbar = () => {
       <div className="container nav-inner">
         <Link to="/" className="nav-logo" style={{ gap: '12px', display: 'flex', alignItems: 'center' }}>
           <div className="logo-icon" style={{ background: 'transparent', width: '250px', height: '100px' }}>
-            <img src="/logo.png" alt="Campus IQ" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Campus IQ" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
           <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', whiteSpace: 'nowrap' }}>Every Space Matter</span>
         </Link>
