@@ -250,7 +250,7 @@ const Admin = () => {
                 <tr key={b.id}>
                   <td style={{ fontWeight: 600 }}>{b.roomName}</td>
                   <td>{b.userName}</td>
-                  <td style={{ fontWeight: 500 }}>{b.rollNumber || 'N/A'}</td>
+                  <td style={{ fontWeight: 600 }}>{b.seats || 1}</td>
                   <td>{b.date}<div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{b.time}</div></td>
                   <td><span className={`pill ${b.status}`}>{b.status === 'approved' ? 'accepted' : b.status}</span></td>
                   <td style={{ display: 'flex', gap: '8px' }}>
