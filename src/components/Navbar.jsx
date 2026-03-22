@@ -37,7 +37,7 @@ const Navbar = () => {
             <li key={link.path}>
               <Link
                 to={link.path}
-                className={location.pathname === link.path ? 'active' : ''}
+                className={`nav-item ${location.pathname === link.path ? 'active' : ''}`}
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
@@ -46,70 +46,33 @@ const Navbar = () => {
           ))}
 
           {user ? (
-            <>
-              <li>
-                <span style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  fontSize: '0.88rem',
-                  fontWeight: 600,
-                  color: 'var(--dark)',
-                  padding: '6px 12px',
-                  background: '#EFF6FF',
-                  borderRadius: '999px',
-                  border: '1px solid #BFDBFE'
-                }}>
-                  <span style={{
-                    width: '26px', height: '26px',
-                    background: 'var(--primary)',
-                    borderRadius: '50%',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: 'white', fontSize: '0.7rem', fontWeight: 700
-                  }}>
-                    {user.name?.charAt(0).toUpperCase() || 'U'}
-                  </span>
-                  {user.name}
-                </span>
-              </li>
-              <li>
-                <button
-                  onClick={handleLogout}
-                  style={{
-                    background: 'transparent',
-                    border: '1.5px solid var(--danger)',
-                    color: 'var(--danger)',
-                    borderRadius: '8px',
-                    padding: '6px 14px',
-                    fontSize: '0.85rem',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    transition: 'all 0.15s'
-                  }}
-                  onMouseEnter={e => { e.target.style.background = 'var(--danger)'; e.target.style.color = 'white'; }}
-                  onMouseLeave={e => { e.target.style.background = 'transparent'; e.target.style.color = 'var(--danger)'; }}
-                >
-                  🚪 Logout
-                </button>
-              </li>
-            </>
+            <div className="flex items-center gap-4 ml-4">
+              <div className="flex items-center gap-3 px-4 py-2 bg-indigo-50/50 rounded-2xl border border-indigo-100/50 backdrop-blur-sm">
+                <div className="w-8 h-8 rounded-full bg-grad-primary flex items-center justify-center text-white text-xs font-bold shadow-lg shadow-indigo-200">
+                  {user.name?.charAt(0).toUpperCase() || 'U'}
+                </div>
+                <span className="text-sm font-bold text-gray-700">{user.name}</span>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="btn btn-outline py-2 px-5 text-xs text-red-500 border-red-100 hover:bg-red-50"
+              >
+                Logout
+              </button>
+            </div>
           ) : (
-            <>
-              <li>
-                <Link
-                  to="/login"
-                  className={location.pathname === '/login' ? 'active' : ''}
-                  onClick={() => setIsOpen(false)}
-                >
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link to="/demo" className="nav-cta" onClick={() => setIsOpen(false)}>
-                  Get Started
-                </Link>
-              </li>
-            </>
+            <div className="flex items-center gap-4 ml-4">
+              <Link
+                to="/login"
+                className="text-sm font-bold text-gray-500 hover:text-indigo-600 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Login
+              </Link>
+              <Link to="/demo" className="btn btn-primary py-2.5 px-6 text-xs" onClick={() => setIsOpen(false)}>
+                Get Started
+              </Link>
+            </div>
           )}
         </ul>
 
