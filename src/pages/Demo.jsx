@@ -25,6 +25,9 @@ const ROOM_ICONS = {
 const ROOM_PHOTOS = {
   classroom: `${import.meta.env.BASE_URL}campus_classroom.jpg`,
   study: `${import.meta.env.BASE_URL}campus_study_lounge.jpg`,
+  hall: `${import.meta.env.BASE_URL}campus_hall.jpg`,
+  lab: `${import.meta.env.BASE_URL}campus_lab.jpg`,
+  conf: `${import.meta.env.BASE_URL}campus_conf.jpg`,
 };
 
 const TYPE_LABELS = {
