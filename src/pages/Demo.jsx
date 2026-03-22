@@ -785,7 +785,7 @@ const Demo = () => {
                         }}
                       >
                         {b.status === 'pending' && '⏳ Pending'}
-                        {b.status === 'approved' && '✅ Accepted'}
+                        {b.status === 'approved' && '✅ Approved'}
                         {b.status === 'rejected' && '❌ Rejected - Contact Admin (admin@campusspace.com)'}
                       </span>
                     </div>
