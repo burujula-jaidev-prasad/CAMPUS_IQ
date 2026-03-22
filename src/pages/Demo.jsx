@@ -224,7 +224,7 @@ const Demo = () => {
               </span>
             </div>
             <p style={{ fontSize: '0.84rem', color: '#94A3B8' }}>
-              Bangalore Main Campus ·{' '}
+              CHRIST UNIVERSITY, Lavasa Campus, Pune
               {new Date().toLocaleTimeString([], {
                 hour: '2-digit',
                 minute: '2-digit',
