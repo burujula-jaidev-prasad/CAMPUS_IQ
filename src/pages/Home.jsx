@@ -12,7 +12,7 @@ const Home = () => {
             <h1>Maximize the Value of Your <span>Campus Infrastructure</span></h1>
             <p>Real-time visibility, booking, and analytics for space management that matters — built for universities, hospitals, and corporates.</p>
             <div className="hero-btns">
-              <Link to="/signup" className="btn btn-primary btn-lg">Get Started</Link>
+              <Link to="/demo" className="btn btn-primary btn-lg">Get Started</Link>
             </div>
 
           </div>
@@ -187,7 +187,7 @@ const Home = () => {
             <h2>Ready to optimize your campus?</h2>
             <p>Join 12+ institutions already using Campus IQ to manage every space that matters.</p>
             <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link to="/signup" className="btn btn-primary btn-lg">Get Started</Link>
+              <Link to="/demo" className="btn btn-primary btn-lg">Get Started</Link>
               <Link to="/business" className="btn btn-outline btn-lg">Learn How It Works</Link>
             </div>
           </div>

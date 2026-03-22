@@ -105,7 +105,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/signup" className="nav-cta" onClick={() => setIsOpen(false)}>
+                <Link to="/demo" className="nav-cta" onClick={() => setIsOpen(false)}>
                   Get Started
                 </Link>
               </li>
