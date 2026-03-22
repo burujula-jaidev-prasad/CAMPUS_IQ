@@ -8,6 +8,13 @@ const Home = () => {
       <section className="hero">
         <div className="container">
           <div className="hero-content">
+            <div className="hero-logo" style={{ marginBottom: '24px', display: 'flex', justifyContent: 'flex-start' }}>
+              <img 
+                src={`${import.meta.env.BASE_URL}logo_brand.png`} 
+                alt="Campus IQ" 
+                style={{ height: '64px', width: 'auto', objectFit: 'contain' }} 
+              />
+            </div>
             <span className="badge badge-blue" style={{ marginBottom: '20px' }}>🏫 Campus Infrastructure Platform</span>
             <h1>Maximize the Value of Your <span>Campus Infrastructure</span></h1>
             <p>Real-time visibility, booking, and analytics for space management that matters — built for universities, hospitals, and corporates.</p>
