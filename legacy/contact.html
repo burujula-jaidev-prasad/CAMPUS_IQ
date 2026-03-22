@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Request Demo – CampusSpace</title>
+  <meta name="description" content="Get in touch with CampusSpace to request a demo or learn how we can help your institution manage spaces more efficiently.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">🏢</div>
+      CampusSpace
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="business.html">Business</a></li>
+      <li><a href="demo.html">Demo</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="contact.html" class="nav-cta">Request Demo</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section style="background:linear-gradient(135deg,#EFF6FF 0%,#F0FDF4 100%); padding:64px 0; border-bottom:1px solid var(--border);">
+  <div class="container">
+    <span class="section-label">Get In Touch</span>
+    <h1 style="margin:12px 0 16px; max-width:560px;">Let's talk about your campus</h1>
+    <p style="font-size:1.05rem; max-width:480px;">Fill out the form and our team will reach out within 1 business day with a personalized demo for your institution.</p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="section" style="background:var(--bg);">
+  <div class="container">
+    <div class="grid-2" style="gap:40px; align-items:start;">
+
+      <!-- INQUIRY FORM -->
+      <div style="background:white; border-radius:14px; padding:36px; border:1px solid var(--border); box-shadow:var(--shadow-md);">
+        <h2 style="font-size:1.4rem; margin-bottom:6px;">Request a Demo</h2>
+        <p style="font-size:0.9rem; margin-bottom:28px;">Tell us about your institution and we'll prepare a customized walkthrough.</p>
+        
+        <form id="contactForm" onsubmit="submitForm(event)">
+          <div class="grid-2" style="gap:16px;">
+            <div class="form-group">
+              <label for="fname">First Name *</label>
+              <input type="text" id="fname" placeholder="Priya" required>
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name *</label>
+              <input type="text" id="lname" placeholder="Sharma" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="org">Organization / Institution *</label>
+            <input type="text" id="org" placeholder="e.g. Christ University, Bangalore" required>
+          </div>
+          <div class="form-group">
+            <label for="role">Your Role *</label>
+            <select id="role" required>
+              <option value="">Select your role</option>
+              <option>Vice Chancellor / Principal</option>
+              <option>Dean / Director</option>
+              <option>IT Head / CTO</option>
+              <option>Registrar / Admin</option>
+              <option>Facilities Manager</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="email">Work Email *</label>
+            <input type="email" id="email" placeholder="admin@university.edu" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="+91 98765 43210">
+          </div>
+          <div class="form-group">
+            <label for="orgType">Institution Type *</label>
+            <select id="orgType" required>
+              <option value="">Select type</option>
+              <option>University / College</option>
+              <option>Hospital / Healthcare</option>
+              <option>Corporate Campus</option>
+              <option>Co-working Space</option>
+              <option>School</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="spaces">Approximate Number of Spaces</label>
+            <select id="spaces">
+              <option value="">Select range</option>
+              <option>Less than 50</option>
+              <option>50 – 150</option>
+              <option>150 – 300</option>
+              <option>300 – 500</option>
+              <option>500+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Tell us about your challenge *</label>
+            <textarea id="message" placeholder="What space management challenge are you facing? What are your goals?" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">
+            👉 Request Demo
+          </button>
+          <p style="font-size:0.8rem; text-align:center; margin-top:12px; color:var(--text-muted);">We never share your information. Response within 1 business day.</p>
+        </form>
+      </div>
+
+      <!-- RIGHT SIDEBAR INFO -->
+      <div style="display:flex; flex-direction:column; gap:20px;">
+
+        <!-- What to expect -->
+        <div style="background:white; border-radius:var(--radius); padding:28px; border:1px solid var(--border);">
+          <h3 style="color:var(--dark); margin-bottom:20px; font-size:1rem;">What happens next?</h3>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:14px;">
+              <div style="width:32px; height:32px; border-radius:50%; background:var(--primary-light); color:var(--primary); font-weight:700; font-size:0.9rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">1</div>
+              <div>
+                <div style="font-weight:600; color:var(--dark); margin-bottom:2px; font-size:0.9rem;">We review your request</div>
+                <p style="font-size:0.83rem;">Within 24 hours our team reviews your institution's requirements.</p>
+              </div>
+            </div>
+            <div style="display:flex; gap:14px;">
+              <div style="width:32px; height:32px; border-radius:50%; background:var(--primary-light); color:var(--primary); font-weight:700; font-size:0.9rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">2</div>
+              <div>
+                <div style="font-weight:600; color:var(--dark); margin-bottom:2px; font-size:0.9rem;">Schedule a call</div>
+                <p style="font-size:0.83rem;">We'll email you a calendar link to pick a convenient time slot.</p>
+              </div>
+            </div>
+            <div style="display:flex; gap:14px;">
+              <div style="width:32px; height:32px; border-radius:50%; background:var(--primary-light); color:var(--primary); font-weight:700; font-size:0.9rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">3</div>
+              <div>
+                <div style="font-weight:600; color:var(--dark); margin-bottom:2px; font-size:0.9rem;">Live demo + Q&A</div>
+                <p style="font-size:0.83rem;">30-minute personalized walkthrough of the platform for your institution.</p>
+              </div>
+            </div>
+            <div style="display:flex; gap:14px;">
+              <div style="width:32px; height:32px; border-radius:50%; background:var(--primary-light); color:var(--primary); font-weight:700; font-size:0.9rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">4</div>
+              <div>
+                <div style="font-weight:600; color:var(--dark); margin-bottom:2px; font-size:0.9rem;">Custom proposal</div>
+                <p style="font-size:0.83rem;">Receive a tailored plan and pricing based on your institution's needs.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick contact -->
+        <div style="background:white; border-radius:var(--radius); padding:28px; border:1px solid var(--border);">
+          <h3 style="color:var(--dark); margin-bottom:16px; font-size:1rem;">Contact Directly</h3>
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <div style="display:flex; gap:12px; align-items:center;">
+              <div style="width:38px; height:38px; background:var(--primary-light); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">📧</div>
+              <div>
+                <div style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">Email</div>
+                <div style="font-size:0.9rem; font-weight:600; color:var(--dark);">hello@campusspace.in</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:center;">
+              <div style="width:38px; height:38px; background:var(--primary-light); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">📱</div>
+              <div>
+                <div style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">Phone</div>
+                <div style="font-size:0.9rem; font-weight:600; color:var(--dark);">+91 98765 00000</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:center;">
+              <div style="width:38px; height:38px; background:var(--primary-light); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">📍</div>
+              <div>
+                <div style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">Location</div>
+                <div style="font-size:0.9rem; font-weight:600; color:var(--dark);">Bangalore, Karnataka, India</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trust signals -->
+        <div style="background:var(--dark); border-radius:var(--radius); padding:24px; color:white;">
+          <h4 style="margin-bottom:14px; color:white; font-size:0.9rem;">Why 12+ institutions chose us</h4>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span>
+              <span style="font-size:0.85rem; color:#CBD5E1;">No hardware required for basic setup</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span>
+              <span style="font-size:0.85rem; color:#CBD5E1;">Live in under 2 weeks</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span>
+              <span style="font-size:0.85rem; color:#CBD5E1;">Dedicated onboarding support</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span>
+              <span style="font-size:0.85rem; color:#CBD5E1;">No lock-in contracts</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span>
+              <span style="font-size:0.85rem; color:#CBD5E1;">Data stays on your servers (optional)</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUCCESS STATE (hidden) -->
+<div id="successState" style="display:none; background:var(--bg); padding:80px 0; text-align:center;">
+  <div class="container">
+    <div style="font-size:4rem; margin-bottom:20px;">🎉</div>
+    <h2 style="color:var(--dark); margin-bottom:12px;">Request Submitted!</h2>
+    <p style="font-size:1.05rem; max-width:480px; margin:0 auto 28px;">Thank you! Our team will reach out within 1 business day with a personalized demo schedule.</p>
+    <a href="demo.html" class="btn btn-primary btn-lg">Explore the Demo While You Wait</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo" style="color:white; gap:10px; display:flex; align-items:center; margin-bottom:12px;">
+          <div class="logo-icon">🏢</div>
+          CampusSpace
+        </div>
+        <p>Smart space management platform for universities, hospitals, and corporate campuses.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="demo.html">Live Demo</a>
+        <a href="business.html">How It Works</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="reviews.html">Reviews</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Industries</h4>
+        <a href="#">Universities</a>
+        <a href="#">Hospitals</a>
+        <a href="#">Corporate</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CampusSpace. All rights reserved.</span>
+      <span>Built for smarter campuses 🏫</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+if (localStorage.getItem('userRole') === 'admin') {
+  window.location.href = 'admin.html';
+}
+function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+
+function submitForm(e) {
+  e.preventDefault();
+  const form = document.querySelector('form');
+  const section = document.querySelector('section:last-of-type');
+  // Hide main section, show success
+  document.querySelectorAll('section').forEach(s => { if (!s.id) s.style.display='none'; });
+  document.getElementById('successState').style.display = 'block';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>

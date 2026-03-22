@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusSpace – Smart Campus Space Management</title>
+  <meta name="description" content="Real-time visibility, booking, and analytics for smarter campus space management. Maximize the value of your campus infrastructure.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">🏢</div>
+      CampusSpace
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="business.html">Business</a></li>
+      <li><a href="demo.html">Demo</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="contact.html" class="nav-cta">Request Demo</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <span class="badge badge-blue" style="margin-bottom:20px">🏫 Campus Infrastructure Platform</span>
+      <h1>Maximize the Value of Your <span>Campus Infrastructure</span></h1>
+      <p>Real-time visibility, booking, and analytics for smarter space management — built for universities, hospitals, and corporates.</p>
+      <div class="hero-btns">
+        <a href="contact.html" class="btn btn-primary btn-lg">👉 Request Demo</a>
+        <a href="demo.html" class="btn btn-outline btn-lg">See Live Demo</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>40%</strong>
+          <span>Higher space utilization</span>
+        </div>
+        <div class="hero-stat">
+          <strong>5000+</strong>
+          <span>Rooms managed</span>
+        </div>
+        <div class="hero-stat">
+          <strong>30 sec</strong>
+          <span>Booking time</span>
+        </div>
+        <div class="hero-stat">
+          <strong>12+</strong>
+          <span>Institutions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED BY -->
+<section class="section-sm" style="background:var(--bg); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <p style="text-align:center; font-size:0.82rem; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; color:var(--text-muted); margin-bottom:24px;">Trusted by leading institutions</p>
+    <div style="display:flex; flex-wrap:wrap; gap:32px; justify-content:center; align-items:center; opacity:0.6;">
+      <span style="font-weight:700; font-size:1.1rem; color:var(--dark)">🎓 Christ University</span>
+      <span style="font-weight:700; font-size:1.1rem; color:var(--dark)">🏥 Manipal Hospitals</span>
+      <span style="font-weight:700; font-size:1.1rem; color:var(--dark)">🏢 WeWork India</span>
+      <span style="font-weight:700; font-size:1.1rem; color:var(--dark)">🎓 BITS Pilani</span>
+      <span style="font-weight:700; font-size:1.1rem; color:var(--dark)">🏢 Infosys Campus</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM SECTION -->
+<section class="section problem-section">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label">The Problem</span>
+      <h2>Spaces exist — but no one knows how to use them</h2>
+      <p>Most institutions sit on valuable infrastructure that goes underutilized due to a lack of visibility and tools.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="icon">😵</div>
+        <h3>No Visibility</h3>
+        <p>Admins have no real-time view of which rooms are free, occupied, or available soon.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📊</div>
+        <h3>No Data, No Decisions</h3>
+        <p>Without usage analytics, institutions can't optimize space allocation or plan expansions.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📉</div>
+        <h3>Revenue Left on Table</h3>
+        <p>Empty conference halls, underused labs, and idle parking spots that could be monetized.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION SECTION -->
+<section class="section" style="background:white;">
+  <div class="container">
+    <div class="section-intro" style="text-align:center; margin:0 auto 0;">
+      <span class="section-label">The Solution</span>
+      <h2>One platform to manage, book, and optimize every space</h2>
+      <p>CampusSpace gives your institution the tools to go from chaotic space management to intelligent infrastructure operations.</p>
+    </div>
+    <div class="solution-cards" style="margin-top:48px;">
+      <div class="solution-card">
+        <div class="solution-icon">📡</div>
+        <h3>Real-Time Availability</h3>
+        <p>Know exactly which rooms, halls, labs, or parking spots are free at any moment with live sensor and booking data.</p>
+        <div style="margin-top:16px;"><span class="badge badge-blue">Live Updates</span></div>
+      </div>
+      <div class="solution-card">
+        <div class="solution-icon">📅</div>
+        <h3>Instant Booking System</h3>
+        <p>Faculty, students, and staff can search, select, and book any space in under 30 seconds — from web or mobile.</p>
+        <div style="margin-top:16px;"><span class="badge badge-blue">30-Second Booking</span></div>
+      </div>
+      <div class="solution-card">
+        <div class="solution-icon">📊</div>
+        <h3>Usage Analytics Dashboard</h3>
+        <p>Powerful admin dashboards with peak usage hours, occupancy trends, forecast models, and actionable insights.</p>
+        <div style="margin-top:16px;"><span class="badge badge-blue">Smart Reports</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT LOOKS -->
+<section class="section" style="background:var(--bg);">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:40px;">
+      <span class="section-label">Platform Preview</span>
+      <h2>See the platform in action</h2>
+    </div>
+    <div class="demo-snippet">
+      <div style="display:flex; gap:12px; margin-bottom:24px; flex-wrap:wrap; justify-content:center;">
+        <select class="mini-filter" style="padding:8px 14px; border:1.5px solid var(--border); border-radius:8px; font-family:inherit; font-size:0.88rem; color:var(--text);">
+          <option>Building: Christ University Main</option>
+        </select>
+        <select class="mini-filter" style="padding:8px 14px; border:1.5px solid var(--border); border-radius:8px; font-family:inherit; font-size:0.88rem; color:var(--text);">
+          <option>Block: Science Block</option>
+        </select>
+        <select class="mini-filter" style="padding:8px 14px; border:1.5px solid var(--border); border-radius:8px; font-family:inherit; font-size:0.88rem; color:var(--text);">
+          <option>Floor: 2nd Floor</option>
+        </select>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; text-align:left;">
+        <div class="card" style="cursor:pointer;" onclick="window.location='demo.html'">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted)">S201</span>
+            <span class="badge badge-green">Available</span>
+          </div>
+          <h4 style="color:var(--dark); margin-bottom:4px;">Seminar Hall</h4>
+          <p style="font-size:0.82rem; margin-bottom:12px;">Capacity: 80 · Lab</p>
+          <div class="progress-bar"><div class="progress-fill green" style="width:30%"></div></div>
+          <p style="font-size:0.78rem; margin-top:6px;">30% utilized today</p>
+        </div>
+        <div class="card" style="cursor:pointer;" onclick="window.location='demo.html'">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted)">L205</span>
+            <span class="badge badge-red">Occupied</span>
+          </div>
+          <h4 style="color:var(--dark); margin-bottom:4px;">Computer Lab</h4>
+          <p style="font-size:0.82rem; margin-bottom:12px;">Capacity: 40 · Lab</p>
+          <div class="progress-bar"><div class="progress-fill red" style="width:90%"></div></div>
+          <p style="font-size:0.78rem; margin-top:6px;">90% utilized today</p>
+        </div>
+        <div class="card" style="cursor:pointer;" onclick="window.location='demo.html'">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted)">C101</span>
+            <span class="badge badge-green">Available</span>
+          </div>
+          <h4 style="color:var(--dark); margin-bottom:4px;">Classroom 101</h4>
+          <p style="font-size:0.82rem; margin-bottom:12px;">Capacity: 60 · Classroom</p>
+          <div class="progress-bar"><div class="progress-fill blue" style="width:55%"></div></div>
+          <p style="font-size:0.78rem; margin-top:6px;">55% utilized today</p>
+        </div>
+        <div class="card" style="cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; border:2px dashed var(--border); box-shadow:none;" onclick="window.location='demo.html'">
+          <span style="font-size:2rem; margin-bottom:8px;">➕</span>
+          <p style="font-size:0.88rem; color:var(--primary); font-weight:600;">Explore Full Demo</p>
+        </div>
+      </div>
+      <a href="demo.html" class="btn btn-primary" style="margin-top:28px;">Open Full Demo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE SECTION -->
+<section class="section value-section">
+  <div class="container">
+    <div class="section-intro" style="text-align:left;">
+      <span class="section-label">Why CampusSpace</span>
+      <h2>Transform how your institution operates</h2>
+      <p>Real benefits, measurable outcomes — from day one of deployment.</p>
+    </div>
+    <div class="value-grid">
+      <div class="value-item">
+        <div class="val-icon">📈</div>
+        <h3>Better Utilization</h3>
+        <p>Institutions see an average 40% improvement in space utilization within the first semester.</p>
+      </div>
+      <div class="value-item">
+        <div class="val-icon">🎓</div>
+        <h3>Improved Student Experience</h3>
+        <p>Students find rooms instantly, book study halls, and never waste time searching for space.</p>
+      </div>
+      <div class="value-item">
+        <div class="val-icon">💰</div>
+        <h3>Revenue Generation</h3>
+        <p>Monetize idle spaces by enabling external bookings, event hosting, and premium parking.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="section" style="background:var(--bg);">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Ready to optimize your campus?</h2>
+      <p>Join 12+ institutions already using CampusSpace to manage smarter.</p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a href="contact.html" class="btn btn-lg" style="background:white; color:var(--primary);">👉 Request Demo</a>
+        <a href="business.html" class="btn btn-outline btn-lg">Learn How It Works</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo" style="color:white; gap:10px; display:flex; align-items:center; margin-bottom:12px;">
+          <div class="logo-icon">🏢</div>
+          CampusSpace
+        </div>
+        <p>Smart space management platform for universities, hospitals, and corporate campuses.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="demo.html">Live Demo</a>
+        <a href="business.html">How It Works</a>
+        <a href="#">Analytics</a>
+        <a href="#">Booking System</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="reviews.html">Reviews</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+      </div>
+      <div class="footer-col">
+        <h4>Industries</h4>
+        <a href="#">Universities</a>
+        <a href="#">Hospitals</a>
+        <a href="#">Corporate</a>
+        <a href="#">Co-working</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CampusSpace. All rights reserved.</span>
+      <span>Built for smarter campuses 🏫</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Force Admin back to Dashboard if they try to visit public pages
+if (localStorage.getItem('userRole') === 'admin') {
+  window.location.href = 'admin.html';
+}
+
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+</script>
+</body>
+</html>

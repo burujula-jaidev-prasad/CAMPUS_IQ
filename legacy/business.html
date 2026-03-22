@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How It Works – CampusSpace Business</title>
+  <meta name="description" content="Learn how institutions integrate CampusSpace to manage spaces, gain insights, and generate revenue from campus infrastructure.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">🏢</div>
+      CampusSpace
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="business.html" class="active">Business</a></li>
+      <li><a href="demo.html">Demo</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="contact.html" class="nav-cta">Request Demo</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section style="background:linear-gradient(135deg,#EFF6FF 0%,#F0FDF4 100%); padding:64px 0; border-bottom:1px solid var(--border);">
+  <div class="container">
+    <span class="section-label">For Institutions</span>
+    <h1 style="max-width:600px; margin:12px 0 16px;">How institutions work with CampusSpace</h1>
+    <p style="max-width:520px; font-size:1.05rem;">A simple, guided onboarding. We set up everything — you start seeing insights from day one.</p>
+    <a href="contact.html" class="btn btn-primary" style="margin-top:24px;">Get Started Today</a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS STEPS -->
+<section class="section" style="background:white;">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label">Process</span>
+      <h2>Simple 4-step onboarding</h2>
+      <p>From signing up to seeing live data — takes as little as one week.</p>
+    </div>
+    <div style="margin-top:48px; display:flex; flex-direction:column; gap:0;">
+      <div style="display:grid; grid-template-columns:80px 1fr; gap:24px; padding-bottom:40px; position:relative;">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:0;">
+          <div class="step-num" style="width:52px; height:52px; font-size:1.1rem; flex-shrink:0;">1</div>
+          <div style="flex:1; width:2px; background:var(--border); margin-top:8px;"></div>
+        </div>
+        <div style="padding-top:12px;">
+          <span class="badge badge-blue" style="margin-bottom:10px;">Week 1</span>
+          <h3 style="color:var(--dark); margin-bottom:8px; font-size:1.2rem;">Institution Integrates Our System</h3>
+          <p style="max-width:560px;">Your IT team connects via our API or we provide a hosted solution. No hardware required for basic setup — sensors are optional for live occupancy.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">
+            <span class="badge badge-green">API Integration</span>
+            <span class="badge badge-green">Cloud Hosted</span>
+            <span class="badge badge-green">SSO Support</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:80px 1fr; gap:24px; padding-bottom:40px;">
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div class="step-num" style="width:52px; height:52px; font-size:1.1rem; flex-shrink:0;">2</div>
+          <div style="flex:1; width:2px; background:var(--border); margin-top:8px;"></div>
+        </div>
+        <div style="padding-top:12px;">
+          <span class="badge badge-blue" style="margin-bottom:10px;">Week 1–2</span>
+          <h3 style="color:var(--dark); margin-bottom:8px; font-size:1.2rem;">We Map Your Spaces</h3>
+          <p style="max-width:560px;">Our team works with your admin to digitally map every room, hall, lab, parking slot, and common area. Each space gets a unique ID with metadata.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">
+            <span class="badge badge-blue">Classrooms</span>
+            <span class="badge badge-blue">Labs</span>
+            <span class="badge badge-blue">Auditoriums</span>
+            <span class="badge badge-blue">Parking</span>
+            <span class="badge badge-blue">Common Areas</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:80px 1fr; gap:24px; padding-bottom:40px;">
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div class="step-num" style="width:52px; height:52px; font-size:1.1rem; flex-shrink:0;">3</div>
+          <div style="flex:1; width:2px; background:var(--border); margin-top:8px;"></div>
+        </div>
+        <div style="padding-top:12px;">
+          <span class="badge badge-blue" style="margin-bottom:10px;">Week 2</span>
+          <h3 style="color:var(--dark); margin-bottom:8px; font-size:1.2rem;">Platform Goes Live — Booking & Availability</h3>
+          <p style="max-width:560px;">Your institution gets a branded portal. Students and staff can view availability and book spaces instantly. Admins get the dashboard to manage and approve requests.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">
+            <span class="badge badge-green">Student Booking Portal</span>
+            <span class="badge badge-green">Admin Approval Workflow</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:80px 1fr; gap:24px;">
+        <div style="display:flex; align-items:flex-start; justify-content:center;">
+          <div class="step-num" style="width:52px; height:52px; font-size:1.1rem; background:var(--accent);">4</div>
+        </div>
+        <div style="padding-top:12px;">
+          <span class="badge badge-green" style="margin-bottom:10px;">Ongoing</span>
+          <h3 style="color:var(--dark); margin-bottom:8px; font-size:1.2rem;">Admin Dashboard Gives Insights</h3>
+          <p style="max-width:560px;">Track utilization trends, peak hours, underused spaces, and forecasted demand. Export reports for planning and audits. Make smarter infrastructure decisions with real data.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;">
+            <span class="badge badge-yellow">Weekly Reports</span>
+            <span class="badge badge-yellow">Occupancy Forecast</span>
+            <span class="badge badge-yellow">CSV Export</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE PROVIDE -->
+<section class="section" style="background:var(--bg);">
+  <div class="container">
+    <div style="text-align:center; max-width:560px; margin:0 auto 48px;">
+      <span class="section-label">Features</span>
+      <h2>What we provide to your institution</h2>
+      <p>Three core modules that work together to optimize your entire campus.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div style="font-size:2rem; margin-bottom:16px;">🖥️</div>
+        <h3 style="color:var(--dark); margin-bottom:12px;">Admin Dashboard</h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+          <li style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span><span style="font-size:0.9rem; color:var(--text);">Real-time space occupancy map</span></li>
+          <li style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span><span style="font-size:0.9rem; color:var(--text);">Booking management & approval</span></li>
+          <li style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span><span style="font-size:0.9rem; color:var(--text);">Utilization analytics & reports</span></li>
+          <li style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span><span style="font-size:0.9rem; color:var(--text);">Space performance alerts</span></li>
+          <li style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span><span style="font-size:0.9rem; color:var(--text);">Role-based access control</span></li>
+        </ul>
+      </div>
+      <div class="card" style="border-top:3px solid var(--primary);">
+        <div style="font-size:2rem; margin-bottom:16px;">📅</div>
+        <h3 style="color:var(--dark); margin-bottom:12px;">Booking System</h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+          <li style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span><span style="font-size:0.9rem; color:var(--text);">Self-service web & mobile portal</span></li>
+          <li style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span><span style="font-size:0.9rem; color:var(--text);">Conflict detection & prevention</span></li>
+          <li style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span><span style="font-size:0.9rem; color:var(--text);">Recurring booking support</span></li>
+          <li style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span><span style="font-size:0.9rem; color:var(--text);">Email & SMS confirmation</span></li>
+          <li style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span><span style="font-size:0.9rem; color:var(--text);">QR code check-in system</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div style="font-size:2rem; margin-bottom:16px;">📊</div>
+        <h3 style="color:var(--dark); margin-bottom:12px;">Analytics & Reports</h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+          <li style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span><span style="font-size:0.9rem; color:var(--text);">Peak usage time analysis</span></li>
+          <li style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span><span style="font-size:0.9rem; color:var(--text);">Occupancy forecast (7 & 30 days)</span></li>
+          <li style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span><span style="font-size:0.9rem; color:var(--text);">Department-wise utilization</span></li>
+          <li style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span><span style="font-size:0.9rem; color:var(--text);">Revenue tracking for paid spaces</span></li>
+          <li style="display:flex; gap:10px; align-items:flex-start;"><span style="color:var(--accent); font-weight:700; flex-shrink:0;">✓</span><span style="font-size:0.9rem; color:var(--text);">Monthly PDF reports</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="section" style="background:white;">
+  <div class="container">
+    <div style="text-align:center; max-width:560px; margin:0 auto 48px;">
+      <span class="section-label">Industries</span>
+      <h2>Built for any institution with spaces</h2>
+      <p>CampusSpace scales across different verticals, each with their own unique space needs.</p>
+    </div>
+    <div class="industry-grid">
+      <div class="industry-card">
+        <div class="ind-icon">🎓</div>
+        <h3>Universities & Colleges</h3>
+        <p style="font-size:0.85rem;">Manage classrooms, labs, libraries, auditoriums, hostels, and exam centers.</p>
+        <div style="margin-top:14px;"><a href="demo.html" style="font-size:0.85rem; color:var(--primary); font-weight:600;">See Demo →</a></div>
+      </div>
+      <div class="industry-card">
+        <div class="ind-icon">🏢</div>
+        <h3>Corporate Campuses</h3>
+        <p style="font-size:0.85rem;">Hot-desking, meeting rooms, cafeteria management, and parking optimization.</p>
+        <div style="margin-top:14px;"><a href="contact.html" style="font-size:0.85rem; color:var(--primary); font-weight:600;">Inquire →</a></div>
+      </div>
+      <div class="industry-card">
+        <div class="ind-icon">🏥</div>
+        <h3>Hospitals & Healthcare</h3>
+        <p style="font-size:0.85rem;">OPD rooms, operation theatres, consultation rooms, and patient waiting areas.</p>
+        <div style="margin-top:14px;"><a href="contact.html" style="font-size:0.85rem; color:var(--primary); font-weight:600;">Inquire →</a></div>
+      </div>
+      <div class="industry-card">
+        <div class="ind-icon">💼</div>
+        <h3>Co-working Spaces</h3>
+        <p style="font-size:0.85rem;">Desk booking, meeting rooms, event halls — and revenue tracking per booking.</p>
+        <div style="margin-top:14px;"><a href="contact.html" style="font-size:0.85rem; color:var(--primary); font-weight:600;">Inquire →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING HINT -->
+<section class="section" style="background:var(--bg);">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:40px;">
+      <span class="section-label">Pricing</span>
+      <h2>Flexible plans for every institution size</h2>
+      <p>All plans include onboarding support, analytics, and the booking system.</p>
+    </div>
+    <div class="grid-3" style="max-width:900px; margin:0 auto;">
+      <div class="card" style="text-align:center;">
+        <h3 style="color:var(--text-muted); font-size:0.9rem; font-weight:600; text-transform:uppercase; letter-spacing:1px;">Starter</h3>
+        <div style="font-size:2.2rem; font-weight:800; color:var(--dark); margin:16px 0 4px;">₹49K<span style="font-size:1rem; font-weight:500; color:var(--text-muted)">/year</span></div>
+        <p style="font-size:0.85rem; margin-bottom:20px;">Up to 50 spaces</p>
+        <a href="contact.html" class="btn btn-outline" style="width:100%;">Get Started</a>
+      </div>
+      <div class="card" style="text-align:center; border:2px solid var(--primary); position:relative;">
+        <div style="position:absolute; top:-12px; left:50%; transform:translateX(-50%);">
+          <span class="badge badge-blue">Most Popular</span>
+        </div>
+        <h3 style="color:var(--primary); font-size:0.9rem; font-weight:600; text-transform:uppercase; letter-spacing:1px;">Growth</h3>
+        <div style="font-size:2.2rem; font-weight:800; color:var(--dark); margin:16px 0 4px;">₹1.2L<span style="font-size:1rem; font-weight:500; color:var(--text-muted)">/year</span></div>
+        <p style="font-size:0.85rem; margin-bottom:20px;">Up to 250 spaces</p>
+        <a href="contact.html" class="btn btn-primary" style="width:100%;">Request Demo</a>
+      </div>
+      <div class="card" style="text-align:center;">
+        <h3 style="color:var(--text-muted); font-size:0.9rem; font-weight:600; text-transform:uppercase; letter-spacing:1px;">Enterprise</h3>
+        <div style="font-size:2.2rem; font-weight:800; color:var(--dark); margin:16px 0 4px;">Custom</div>
+        <p style="font-size:0.85rem; margin-bottom:20px;">Unlimited spaces + custom features</p>
+        <a href="contact.html" class="btn btn-outline" style="width:100%;">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="background:white;">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Let's build your smart campus together</h2>
+      <p>Get a personalized walkthrough for your institution's unique needs.</p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a href="contact.html" class="btn btn-lg" style="background:white; color:var(--primary);">👉 Request Demo</a>
+        <a href="demo.html" class="btn btn-outline btn-lg">See Live Demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo" style="color:white; gap:10px; display:flex; align-items:center; margin-bottom:12px;">
+          <div class="logo-icon">🏢</div>
+          CampusSpace
+        </div>
+        <p>Smart space management platform for universities, hospitals, and corporate campuses.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="demo.html">Live Demo</a>
+        <a href="business.html">How It Works</a>
+        <a href="#">Analytics</a>
+        <a href="#">Booking System</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="reviews.html">Reviews</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">About Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Industries</h4>
+        <a href="#">Universities</a>
+        <a href="#">Hospitals</a>
+        <a href="#">Corporate</a>
+        <a href="#">Co-working</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CampusSpace. All rights reserved.</span>
+      <span>Built for smarter campuses 🏫</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+if (localStorage.getItem('userRole') === 'admin') {
+  window.location.href = 'admin.html';
+}
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+</script>
+</body>
+</html>

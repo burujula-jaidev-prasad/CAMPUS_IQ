@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviews & Testimonials – CampusSpace</title>
+  <meta name="description" content="Read what institutions and users say about CampusSpace's space management platform.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">🏢</div>
+      CampusSpace
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="business.html">Business</a></li>
+      <li><a href="demo.html">Demo</a></li>
+      <li><a href="reviews.html" class="active">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="contact.html" class="nav-cta">Request Demo</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section style="background:linear-gradient(135deg,#EFF6FF 0%,#F0FDF4 100%); padding:64px 0; border-bottom:1px solid var(--border); text-align:center;">
+  <div class="container">
+    <span class="section-label">Testimonials</span>
+    <h1 style="margin:12px 0 16px;">Trusted by institutions across India</h1>
+    <p style="font-size:1.05rem; max-width:520px; margin:0 auto 24px;">Hear directly from the administrators, faculty, and students who use CampusSpace every day.</p>
+    <div style="display:flex; gap:40px; justify-content:center; flex-wrap:wrap; margin-top:32px;">
+      <div>
+        <div style="font-size:2rem; font-weight:800; color:var(--dark);">4.8★</div>
+        <div style="font-size:0.85rem; color:var(--text-muted);">Avg rating</div>
+      </div>
+      <div>
+        <div style="font-size:2rem; font-weight:800; color:var(--dark);">12+</div>
+        <div style="font-size:0.85rem; color:var(--text-muted);">Institutions</div>
+      </div>
+      <div>
+        <div style="font-size:2rem; font-weight:800; color:var(--dark);">5000+</div>
+        <div style="font-size:0.85rem; color:var(--text-muted);">Active users</div>
+      </div>
+      <div>
+        <div style="font-size:2rem; font-weight:800; color:var(--dark);">40%</div>
+        <div style="font-size:0.85rem; color:var(--text-muted);">Better utilization</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTITUTION REVIEWS -->
+<section class="section" style="background:var(--bg);">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:40px;">
+      <span class="section-label">Institution Reviews</span>
+      <h2>What administrators say</h2>
+    </div>
+    <div class="grid-3">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"CampusSpace transformed how we manage our 200+ rooms. Utilization improved by 30% in the first semester. Our admin workload dropped by half — no more manual booking sheets."</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:var(--primary);">RK</div>
+          <div class="author-info">
+            <strong>Senior Administrator</strong>
+            <span>Dean of Administration · Christ University, Bangalore</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card" style="border-top:3px solid var(--primary);">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The analytics dashboard alone was worth it. We identified that 40% of our seminar halls were sitting empty during peak hours. Now we've reallocated them to generate rental income."</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:#8B5CF6;">SM</div>
+          <div class="author-info">
+            <strong>Sunita Mehra</strong>
+            <span>VP Infrastructure · Manipal Hospitals, Mangaluru</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★☆</div>
+        <blockquote>"Onboarding was quick — our entire campus was mapped in under a week. The booking system has been adopted by 90% of faculty without any training required. Very intuitive."</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:var(--accent);">AP</div>
+          <div class="author-info">
+            <strong>Arun Pillai</strong>
+            <span>IT Director · BITS Pilani – Hyderabad Campus</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"We run a co-working space with 3 locations. CampusSpace gave us a single dashboard to see utilization across all sites. Revenue per desk has increased 22% since we started optimizing."</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:#F59E0B; color:var(--dark);">NK</div>
+          <div class="author-info">
+            <strong>Neha Kapoor</strong>
+            <span>Operations Manager · SpacePlex Co-working</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The parking management module alone saved us massive headaches. Students used to complain constantly. Now they just check the app and book their spot before arriving on campus."</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:#EF4444;">VR</div>
+          <div class="author-info">
+            <strong>Vijay Rao</strong>
+            <span>Campus Registrar · Jain University, Bangalore</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Our hospital OT booking used to take 3 phone calls and 15 minutes. Now it's 30 seconds through the portal. Patient turnaround time has improved significantly as a result."</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:#06B6D4;">DS</div>
+          <div class="author-info">
+            <strong>Dr. Deepa Suresh</strong>
+            <span>Operations Head · Fortis Hospital, Bangalore</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STUDENT / USER REVIEWS -->
+<section class="section" style="background:white;">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:40px;">
+      <span class="section-label">User Feedback</span>
+      <h2>What students & staff say</h2>
+    </div>
+    <div class="grid-3">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"I used to walk all the way across campus to check if a lab was free. Now I check from my phone in 5 seconds. Game changer for my study routine."</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:var(--primary);">PK</div>
+          <div class="author-info">
+            <strong>Priya K.</strong>
+            <span>3rd Year CSE · Christ University</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Booked a conference room for my project group in literally 30 seconds. The slot availability view is so clear — no confusion, no conflicts. Love it."</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:var(--accent);">AR</div>
+          <div class="author-info">
+            <strong>Aarav R.</strong>
+            <span>MBA Student · BITS Pilani</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★☆</div>
+        <blockquote>"As a faculty member, getting a classroom for extra sessions used to require emailing 3 departments. Now it's self-service and instant approval. Much more professional."</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:#8B5CF6;">MS</div>
+          <div class="author-info">
+            <strong>Prof. Meena S.</strong>
+            <span>Physics Dept. · Christ University</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT METRICS -->
+<section class="section" style="background:var(--dark);">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:40px;">
+      <span class="section-label" style="color:#60A5FA;">Impact Metrics</span>
+      <h2 style="color:white;">Real results, measured outcomes</h2>
+      <p style="color:#94A3B8;">Average across our 12+ institutional clients after 6 months of deployment.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:24px;" class="impact-grid">
+      <div style="background:var(--dark-2); border-radius:var(--radius); padding:28px; text-align:center; border:1px solid var(--dark-3);">
+        <div style="font-size:2.5rem; font-weight:800; color:var(--accent); margin-bottom:8px;">40%</div>
+        <div style="font-size:0.9rem; color:white; font-weight:600; margin-bottom:6px;">Higher Utilization</div>
+        <p style="font-size:0.82rem; color:#94A3B8;">Average increase in room utilization rate</p>
+      </div>
+      <div style="background:var(--dark-2); border-radius:var(--radius); padding:28px; text-align:center; border:1px solid var(--dark-3);">
+        <div style="font-size:2.5rem; font-weight:800; color:#60A5FA; margin-bottom:8px;">95%</div>
+        <div style="font-size:0.9rem; color:white; font-weight:600; margin-bottom:6px;">User Adoption</div>
+        <p style="font-size:0.82rem; color:#94A3B8;">Faculty & staff who actively use the system</p>
+      </div>
+      <div style="background:var(--dark-2); border-radius:var(--radius); padding:28px; text-align:center; border:1px solid var(--dark-3);">
+        <div style="font-size:2.5rem; font-weight:800; color:#F59E0B; margin-bottom:8px;">₹12L</div>
+        <div style="font-size:0.9rem; color:white; font-weight:600; margin-bottom:6px;">Revenue Generated</div>
+        <p style="font-size:0.82rem; color:#94A3B8;">Average annual revenue from monetized spaces</p>
+      </div>
+      <div style="background:var(--dark-2); border-radius:var(--radius); padding:28px; text-align:center; border:1px solid var(--dark-3);">
+        <div style="font-size:2.5rem; font-weight:800; color:#EF4444; margin-bottom:8px;">80%</div>
+        <div style="font-size:0.9rem; color:white; font-weight:600; margin-bottom:6px;">Less Admin Work</div>
+        <p style="font-size:0.82rem; color:#94A3B8;">Reduction in manual booking management</p>
+      </div>
+    </div>
+    <style>@media(max-width:640px){.impact-grid{grid-template-columns:1fr 1fr!important;}}</style>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="background:var(--bg);">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Join 12+ forward-thinking institutions</h2>
+      <p>See how CampusSpace can transform your campus in just one week.</p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a href="contact.html" class="btn btn-lg" style="background:white; color:var(--primary);">👉 Request Demo</a>
+        <a href="demo.html" class="btn btn-outline btn-lg">See Live Demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo" style="color:white; gap:10px; display:flex; align-items:center; margin-bottom:12px;">
+          <div class="logo-icon">🏢</div>
+          CampusSpace
+        </div>
+        <p>Smart space management platform for universities, hospitals, and corporate campuses.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="demo.html">Live Demo</a>
+        <a href="business.html">How It Works</a>
+        <a href="#">Analytics</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="reviews.html">Reviews</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">About Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Industries</h4>
+        <a href="#">Universities</a>
+        <a href="#">Hospitals</a>
+        <a href="#">Corporate</a>
+        <a href="#">Co-working</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CampusSpace. All rights reserved.</span>
+      <span>Built for smarter campuses 🏫</span>
+    </div>
+  </div>
+</footer>
+<script>
+if (localStorage.getItem('userRole') === 'admin') {
+  window.location.href = 'admin.html';
+}
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}</script>
+</body>
+</html>

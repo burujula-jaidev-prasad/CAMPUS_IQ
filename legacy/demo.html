@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Demo – CampusSpace Space Management</title>
+  <meta name="description" content="See CampusSpace in action. Filter rooms, view availability, book spaces, and explore live occupancy data for Christ University campus.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBEf9eb83kCR_7fADUmwmxlIWdZMqg4XSw",
+      authDomain: "campus-opti.firebaseapp.com",
+      projectId: "campus-opti",
+      storageBucket: "campus-opti.firebasestorage.app",
+      messagingSenderId: "85793866139",
+      appId: "1:85793866139:web:35fb8bee9820d1bca3213e"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+  <style>
+    .demo-layout { display: grid; grid-template-columns: 280px 1fr; gap: 24px; align-items: start; }
+    .sidebar { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; position: sticky; top: 80px; }
+    .sidebar h3 { color: var(--dark); margin-bottom: 16px; font-size: 1rem; }
+    .filter-group { margin-bottom: 16px; }
+    .filter-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .filter-group select { width: 100%; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 0.9rem; color: var(--text); background: white; }
+    .filter-group select:focus { outline: none; border-color: var(--primary); }
+    .filter-divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+    .room-card {
+      background: white; border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px 20px; cursor: pointer; transition: all var(--transition);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .room-card:hover { border-color: var(--primary); box-shadow: 0 2px 12px rgba(37,99,235,0.1); }
+    .room-card-left { flex: 1; }
+    .room-card-right { text-align: right; flex-shrink: 0; margin-left: 16px; }
+    .room-id { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 4px; }
+    .room-name { font-size: 0.97rem; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+    .room-meta { font-size: 0.82rem; color: var(--text-muted); }
+    .slots { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+    .slot {
+      padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: 600;
+      cursor: pointer; border: 1.5px solid transparent; transition: all 0.15s;
+    }
+    .slot.free { background: #D1FAE5; color: var(--accent-dark); border-color: #A7F3D0; }
+    .slot.free:hover { background: var(--accent); color: white; border-color: var(--accent); }
+    .slot.busy { background: #FEE2E2; color: var(--danger); cursor: not-allowed; border-color: #FECACA; }
+    .stat-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+    .stat-card .stat-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 8px; }
+    .stat-card .stat-num { font-size: 2rem; font-weight: 800; color: var(--dark); }
+    .stat-card .stat-sub { font-size: 0.82rem; color: var(--text-muted); margin-top: 4px; }
+    .parking-spot {
+      width: 70px; height: 50px; border-radius: 6px; border: 2px solid;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.15s;
+    }
+    .parking-spot.free { border-color: var(--accent); color: var(--accent); background: #D1FAE5; }
+    .parking-spot.free:hover { background: var(--accent); color: white; }
+    .parking-spot.taken { border-color: var(--danger); color: var(--danger); background: #FEE2E2; cursor: not-allowed; }
+    .parking-spot.reserved { border-color: var(--warning); color: #D97706; background: #FEF3C7; }
+    .occ-bar-wrap { background: var(--border); border-radius: 4px; height: 10px; flex: 1; overflow: hidden; }
+    .occ-bar { height: 100%; border-radius: 4px; transition: width 1s ease; }
+    .tabs-bar { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 20px; gap: 0; }
+    .tab-item {
+      padding: 10px 20px; font-size: 0.9rem; font-weight: 500; color: var(--text-muted);
+      cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px;
+      transition: all var(--transition);
+    }
+    .tab-item.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .chart-bar-group { display: flex; gap: 4px; align-items: flex-end; height: 120px; }
+    .chart-bar { flex: 1; border-radius: 4px 4px 0 0; position: relative; min-width: 20px; }
+    .chart-bar span { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); font-size: 0.65rem; font-weight: 600; color: var(--text-muted); white-space: nowrap; margin-bottom: 2px; }
+    .chart-labels { display: flex; gap: 4px; margin-top: 6px; }
+    .chart-label { flex: 1; font-size: 0.65rem; text-align: center; color: var(--text-muted); min-width: 20px; }
+    @media (max-width:900px) {
+      .demo-layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">🏢</div>
+      CampusSpace
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="business.html">Business</a></li>
+      <li><a href="demo.html" class="active">Demo</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="contact.html" class="nav-cta">Request Demo</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- DEMO HEADER -->
+<div style="background:var(--dark); padding:20px 0; border-bottom:1px solid #334155;">
+  <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+    <div>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+        <span style="font-size:1.1rem; font-weight:800; color:white;">🎓 Christ University</span>
+        <span class="badge badge-green">Live System</span>
+      </div>
+      <p style="font-size:0.84rem; color:#94A3B8;">Bangalore Main Campus · Last updated: <span id="lastUpdate"></span></p>
+    </div>
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <div style="font-size:1.5rem; font-weight:800; color:white;" id="liveAvailable">--</div>
+        <div style="font-size:0.75rem; color:#60A5FA;">Available</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:1.5rem; font-weight:800; color:#EF4444;" id="liveOccupied">--</div>
+        <div style="font-size:0.75rem; color:#94A3B8;">Occupied</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:1.5rem; font-weight:800; color:#F59E0B;" id="liveOccupancy">--</div>
+        <div style="font-size:0.75rem; color:#94A3B8;">Occupancy</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="padding-top:32px; padding-bottom:60px;">
+
+  <!-- Live Metrics Bar -->
+  <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:28px;" id="metricsBar">
+    <div class="stat-card">
+      <div class="stat-label">Current Occupancy</div>
+      <div class="stat-num" id="metricOcc">0%</div>
+      <div class="stat-sub">No active sessions</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Expected (2 hrs)</div>
+      <div class="stat-num" style="color:var(--warning)" id="metricForecast">0%</div>
+      <div class="stat-sub">Baseline usage</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Rooms Available</div>
+      <div class="stat-num" style="color:var(--accent)" id="metricAvail">12</div>
+      <div class="stat-sub">Out of 12 total</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Active Bookings</div>
+      <div class="stat-num" style="color:var(--primary)" id="metricBookings">0</div>
+      <div class="stat-sub">Today so far</div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs-bar">
+    <div class="tab-item active" onclick="showTab('spaces',this)">🏫 Spaces</div>
+    <div class="tab-item" onclick="showTab('analytics',this)">📊 Analytics</div>
+    <div class="tab-item" onclick="showTab('parking',this)">🚗 Parking</div>
+  </div>
+
+  <!-- SPACES TAB -->
+  <div id="tab-spaces">
+    <div class="demo-layout">
+      <!-- Sidebar Filters -->
+      <div class="sidebar">
+        <h3>🔍 Filter Spaces</h3>
+        <div class="filter-group">
+          <label>Building</label>
+          <select id="filterBuilding" onchange="applyFilters()">
+            <option value="all">All Buildings</option>
+            <option value="main" selected>Main Block</option>
+            <option value="science">Science Block</option>
+            <option value="arts">Arts Block</option>
+            <option value="admin">Admin Block</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Block / Wing</label>
+          <select id="filterBlock" onchange="applyFilters()">
+            <option value="all">All Blocks</option>
+            <option value="A">Block A</option>
+            <option value="B">Block B</option>
+            <option value="C">Block C</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Floor</label>
+          <select id="filterFloor" onchange="applyFilters()">
+            <option value="all">All Floors</option>
+            <option value="G">Ground</option>
+            <option value="1">1st Floor</option>
+            <option value="2">2nd Floor</option>
+            <option value="3">3rd Floor</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Room Type</label>
+          <select id="filterType" onchange="applyFilters()">
+            <option value="all">All Types</option>
+            <option value="classroom">Classroom</option>
+            <option value="lab">Computer Lab</option>
+            <option value="hall">Seminar Hall</option>
+            <option value="conf">Conference Room</option>
+            <option value="study">Study Room</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Status</label>
+          <select id="filterStatus" onchange="applyFilters()">
+            <option value="all">All Statuses</option>
+            <option value="available">Available Only</option>
+            <option value="occupied">Occupied</option>
+          </select>
+        </div>
+        <hr class="filter-divider">
+        <div class="filter-group">
+          <label>Minimum Capacity</label>
+          <select id="filterCap" onchange="applyFilters()">
+            <option value="0">Any Capacity</option>
+            <option value="20">20+ seats</option>
+            <option value="40">40+ seats</option>
+            <option value="80">80+ seats</option>
+            <option value="150">150+ seats</option>
+          </select>
+        </div>
+        <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="resetFilters()">Reset Filters</button>
+      </div>
+
+      <!-- Room List -->
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <div>
+            <span style="font-size:0.9rem; font-weight:600; color:var(--dark);" id="roomCount">Showing 12 spaces</span>
+            <span style="font-size:0.84rem; color:var(--text-muted); margin-left:8px;">· Christ University Main Campus</span>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-sm btn-outline" onclick="toggleView('list')">☰ List</button>
+            <button class="btn btn-sm btn-primary" onclick="toggleView('card')" id="viewCardBtn">⊞ Cards</button>
+          </div>
+        </div>
+        <div id="roomList" style="display:flex; flex-direction:column; gap:10px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYTICS TAB -->
+  <div id="tab-analytics" style="display:none;">
+    <div class="grid-2" style="margin-bottom:24px;">
+      <div class="stat-card">
+        <div class="stat-label">Today's Peak Hour</div>
+        <div class="stat-num">11 AM</div>
+        <div style="display:flex; align-items:center; gap:10px; margin-top:12px;">
+          <span style="font-size:0.82rem; color:var(--text-muted);">Occupancy at peak:</span>
+          <span style="font-weight:700; color:var(--danger);">91%</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Avg Daily Utilization</div>
+        <div class="stat-num" style="color:var(--primary);">67%</div>
+        <div style="display:flex; align-items:center; gap:10px; margin-top:12px;">
+          <span style="font-size:0.82rem; color:var(--text-muted);">vs last week:</span>
+          <span style="font-weight:700; color:var(--accent);">↑ +12%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:24px;">
+      <!-- Hourly Occupancy Chart -->
+      <div style="background:white; border:1px solid var(--border); border-radius:var(--radius); padding:24px;">
+        <h3 style="color:var(--dark); margin-bottom:4px; font-size:1rem;">Hourly Occupancy – Today</h3>
+        <p style="font-size:0.82rem; margin-bottom:20px;">Campus-wide space usage by hour</p>
+        <div class="chart-bar-group" id="hourlyChart"></div>
+        <div class="chart-labels" id="hourlyLabels"></div>
+      </div>
+
+      <!-- Space Type Breakdown -->
+      <div style="background:white; border:1px solid var(--border); border-radius:var(--radius); padding:24px;">
+        <h3 style="color:var(--dark); margin-bottom:16px; font-size:1rem;">Utilization by Space Type</h3>
+        <div style="display:flex; flex-direction:column; gap:14px;" id="typeBreakdown"></div>
+      </div>
+    </div>
+
+    <!-- Forecast -->
+    <div style="background:white; border:1px solid var(--border); border-radius:var(--radius); padding:24px; margin-bottom:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <div>
+          <h3 style="color:var(--dark); margin-bottom:4px; font-size:1rem;">7-Day Occupancy Forecast</h3>
+          <p style="font-size:0.82rem;">Predicted based on historical usage patterns</p>
+        </div>
+        <span class="badge badge-blue">AI Forecast</span>
+      </div>
+      <div class="chart-bar-group" id="forecastChart" style="height:140px;"></div>
+      <div class="chart-labels" id="forecastLabels"></div>
+      <div style="margin-top:16px; padding:14px; background:var(--bg); border-radius:8px;">
+        <p style="font-size:0.85rem; color:var(--dark);"><strong>💡 Insight:</strong> Thursday is expected to be the busiest day (86% occupancy). Consider opening additional seminar halls or distributing classes.</p>
+      </div>
+    </div>
+
+    <!-- Top Used Rooms Table -->
+    <div style="background:white; border:1px solid var(--border); border-radius:var(--radius); padding:24px;">
+      <h3 style="color:var(--dark); margin-bottom:16px; font-size:1rem;">Top Utilized Spaces This Week</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Room</th><th>Type</th><th>Avg Occupancy</th><th>Total Bookings</th><th>Revenue</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="font-weight:600;">Auditorium A1</td><td><span class="badge badge-blue">Hall</span></td><td><div style="display:flex; align-items:center; gap:8px;"><span>94%</span><div class="progress-bar" style="flex:1;"><div class="progress-fill red" style="width:94%"></div></div></div></td><td>23</td><td style="color:var(--accent); font-weight:600;">₹46,000</td></tr>
+          <tr><td style="font-weight:600;">Computer Lab L201</td><td><span class="badge badge-yellow">Lab</span></td><td><div style="display:flex; align-items:center; gap:8px;"><span>88%</span><div class="progress-bar" style="flex:1;"><div class="progress-fill red" style="width:88%"></div></div></div></td><td>31</td><td style="color:var(--accent); font-weight:600;">—</td></tr>
+          <tr><td style="font-weight:600;">Seminar Hall S301</td><td><span class="badge badge-blue">Hall</span></td><td><div style="display:flex; align-items:center; gap:8px;"><span>75%</span><div class="progress-bar" style="flex:1;"><div class="progress-fill blue" style="width:75%"></div></div></div></td><td>18</td><td style="color:var(--accent); font-weight:600;">₹22,500</td></tr>
+          <tr><td style="font-weight:600;">MBA Classroom C102</td><td><span class="badge badge-green">Class</span></td><td><div style="display:flex; align-items:center; gap:8px;"><span>71%</span><div class="progress-bar" style="flex:1;"><div class="progress-fill green" style="width:71%"></div></div></div></td><td>27</td><td style="color:var(--accent); font-weight:600;">—</td></tr>
+          <tr><td style="font-weight:600;">Study Room SR01</td><td><span class="badge badge-green">Study</span></td><td><div style="display:flex; align-items:center; gap:8px;"><span>62%</span><div class="progress-bar" style="flex:1;"><div class="progress-fill green" style="width:62%"></div></div></div></td><td>44</td><td style="color:var(--accent); font-weight:600;">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PARKING TAB -->
+  <div id="tab-parking" style="display:none;">
+    <div class="grid-2" style="margin-bottom:24px;">
+      <div class="stat-card">
+        <div class="stat-label">Available Parking</div>
+        <div class="stat-num" style="color:var(--accent);" id="parkAvailable">24</div>
+        <div class="stat-sub">Out of 80 total spots</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Occupancy Rate</div>
+        <div class="stat-num" style="color:var(--warning);">70%</div>
+        <div class="stat-sub">56 spots taken</div>
+      </div>
+    </div>
+
+    <div style="background:white; border:1px solid var(--border); border-radius:var(--radius); padding:24px; margin-bottom:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
+        <div>
+          <h3 style="color:var(--dark); margin-bottom:4px; font-size:1rem;">Parking Lot A – Ground Level</h3>
+          <p style="font-size:0.82rem;">Click a free spot (green) to book</p>
+        </div>
+        <div style="display:flex; gap:12px; font-size:0.82rem; flex-wrap:wrap;">
+          <span>🟢 Free</span>
+          <span>🔴 Taken</span>
+          <span>🟡 Reserved</span>
+        </div>
+      </div>
+      <div id="parkingGrid" style="display:flex; flex-wrap:wrap; gap:10px;"></div>
+    </div>
+
+    <div style="background:white; border:1px solid var(--border); border-radius:var(--radius); padding:24px;">
+      <h3 style="color:var(--dark); margin-bottom:16px; font-size:1rem;">Parking Sections</h3>
+      <table class="data-table">
+        <thead><tr><th>Section</th><th>Type</th><th>Total</th><th>Free</th><th>Occupancy</th></tr></thead>
+        <tbody>
+          <tr><td style="font-weight:600;">Lot A</td><td>2-Wheeler</td><td>80</td><td><span style="color:var(--accent); font-weight:600;">24</span></td><td><div style="display:flex; align-items:center; gap:8px;"><span>70%</span><div class="progress-bar" style="flex:1; width:120px;"><div class="progress-fill blue" style="width:70%"></div></div></div></td></tr>
+          <tr><td style="font-weight:600;">Lot B</td><td>4-Wheeler</td><td>40</td><td><span style="color:var(--accent); font-weight:600;">6</span></td><td><div style="display:flex; align-items:center; gap:8px;"><span>85%</span><div class="progress-bar" style="flex:1; width:120px;"><div class="progress-fill red" style="width:85%"></div></div></div></td></tr>
+          <tr><td style="font-weight:600;">Lot C</td><td>Faculty Reserved</td><td>20</td><td><span style="color:var(--accent); font-weight:600;">8</span></td><td><div style="display:flex; align-items:center; gap:8px;"><span>60%</span><div class="progress-bar" style="flex:1; width:120px;"><div class="progress-fill green" style="width:60%"></div></div></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal" style="max-width:520px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px;">
+      <div>
+        <h3 id="modalRoomName">Seminar Hall S201</h3>
+        <p class="modal-subtitle" id="modalRoomMeta">Capacity: 80 · Block A · 2nd Floor</p>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+      <div style="background:var(--bg); border-radius:8px; padding:12px; text-align:center;">
+        <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">STATUS</div>
+        <div style="font-size:1rem; font-weight:700; color:var(--accent); margin-top:4px;" id="modalStatus">Available</div>
+      </div>
+      <div style="background:var(--bg); border-radius:8px; padding:12px; text-align:center;">
+        <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">CAPACITY</div>
+        <div style="font-size:1rem; font-weight:700; color:var(--dark); margin-top:4px;" id="modalCapacity">80 seats</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Your Name</label>
+      <input type="text" id="bookName" placeholder="e.g. Priya Sharma" />
+    </div>
+    <div class="form-group">
+      <label>Date</label>
+      <input type="date" id="bookDate" />
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+      <div class="form-group">
+        <label>Start Time</label>
+        <select id="bookStart">
+          <option>08:00 AM</option><option>09:00 AM</option><option>10:00 AM</option>
+          <option>11:00 AM</option><option>12:00 PM</option><option>01:00 PM</option>
+          <option>02:00 PM</option><option>03:00 PM</option><option>04:00 PM</option>
+          <option>05:00 PM</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>End Time</label>
+        <select id="bookEnd">
+          <option>09:00 AM</option><option>10:00 AM</option><option>11:00 AM</option>
+          <option>12:00 PM</option><option>01:00 PM</option><option>02:00 PM</option>
+          <option>03:00 PM</option><option>04:00 PM</option><option>05:00 PM</option>
+          <option>06:00 PM</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Purpose</label>
+      <select id="bookPurposeSelect" onchange="togglePurposeOther(this.value)" style="width:100%; padding:10px 14px; border:1.5px solid var(--border); border-radius:10px; font-family:inherit; font-size:0.92rem; color:var(--dark); background:white; cursor:pointer;">
+        <option value="">— Select a purpose —</option>
+        <option value="Guest Lecture">Guest Lecture</option>
+        <option value="Team Meeting">Team Meeting</option>
+        <option value="Lab Session">Lab Session</option>
+        <option value="Seminar / Workshop">Seminar / Workshop</option>
+        <option value="Exam / Test">Exam / Test</option>
+        <option value="Group Study">Group Study</option>
+        <option value="Project Presentation">Project Presentation</option>
+        <option value="Club Activity">Club Activity</option>
+        <option value="Other">Other…</option>
+      </select>
+      <input type="text" id="bookPurposeOther" placeholder="Describe your purpose..." style="display:none; margin-top:8px; width:100%; padding:10px 14px; border:1.5px solid var(--border); border-radius:10px; font-family:inherit; font-size:0.92rem; box-sizing:border-box;" />
+    </div>
+    <div style="display:flex; gap:10px; margin-top:4px;">
+      <button class="btn btn-primary" style="flex:1;" onclick="confirmBooking()">✅ Confirm Booking</button>
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal" style="text-align:center; max-width:400px;">
+    <div style="font-size:3rem; margin-bottom:16px;">✅</div>
+    <h3 style="color:var(--dark); margin-bottom:8px;">Booking Confirmed!</h3>
+    <p id="successMsg" style="margin-bottom:24px;"></p>
+    <button class="btn btn-primary" style="width:100%;" onclick="closeSuccess()">Done</button>
+  </div>
+</div>
+
+<!-- PARKING MODAL -->
+<div class="modal-overlay" id="parkingModal">
+  <div class="modal" style="text-align:center; max-width:400px;">
+    <div style="font-size:2.5rem; margin-bottom:12px;">🚗</div>
+    <h3 style="color:var(--dark); margin-bottom:8px;" id="parkSpotName">Spot A-12</h3>
+    <p style="margin-bottom:20px;">Book this parking spot for today?</p>
+    <div class="form-group" style="text-align:left;">
+      <label>Vehicle Number</label>
+      <input type="text" id="vehicleNum" placeholder="e.g. KA 01 AB 1234" />
+    </div>
+    <div style="display:flex; gap:10px;">
+      <button class="btn btn-primary" style="flex:1;" onclick="confirmParking()">Book Spot</button>
+      <button class="btn btn-outline" onclick="closeParkingModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let rooms = []; // now populated from Firestore
+let currentView = 'list';
+let selectedRoom = null;
+let selectedParkSpot = null;
+
+function startSpacesListener() {
+  db.collection('spaces').onSnapshot(snap => {
+    rooms = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    // Re-apply filters to updated data
+    const filtered = filterRoomsLocally(); 
+    renderRooms(filtered);
+    updateLive();
+  });
+}
+
+// Helper to filter currently held 'rooms' array
+function filterRoomsLocally() {
+  const building = document.getElementById('filterBuilding').value;
+  const block = document.getElementById('filterBlock').value;
+  const floor = document.getElementById('filterFloor').value;
+  const type = document.getElementById('filterType').value;
+  const status = document.getElementById('filterStatus').value;
+  const cap = parseInt(document.getElementById('filterCap').value) || 0;
+  
+  return rooms.filter(r => {
+    if (building !== 'all' && r.building !== building) return false;
+    if (block !== 'all' && r.block !== block) return false;
+    if (floor !== 'all' && r.floor !== floor) return false;
+    if (type !== 'all' && r.type !== type) return false;
+    if (status !== 'all' && r.status !== status) return false;
+    if (r.capacity < cap) return false;
+    return true;
+  });
+}
+
+function applyFilters() {
+  const filtered = filterRoomsLocally();
+  renderRooms(filtered);
+}
+
+function renderRooms(data) {
+  const list = document.getElementById('roomList');
+  document.getElementById('roomCount').textContent = `Showing ${data.length} space${data.length!==1?'s':''}`;
+  if (data.length === 0) {
+    list.innerHTML = `<div style="text-align:center; padding:48px; color:var(--text-muted);">😕 No spaces match your filters. <button class="btn btn-outline btn-sm" style="margin-left:10px;" onclick="resetFilters()">Reset</button></div>`;
+    return;
+  }
+  list.innerHTML = data.map(r => {
+    const isAvail = r.status === 'available';
+    const utilColor = r.util > 80 ? 'red' : r.util > 50 ? 'blue' : 'green';
+    const slotsHtml = r.slots.map(s => `<span class="slot free" onclick="event.stopPropagation(); openModal('${r.id}','${s}')">${s}</span>`).join('') +
+      r.slotBusy.map(s => `<span class="slot busy" title="Occupied">${s}</span>`).join('');
+    return `
+    <div class="room-card" onclick="openModal('${r.id}','')">
+      <div class="room-card-left">
+        <div class="room-id">${r.id} · ${r.type.charAt(0).toUpperCase()+r.type.slice(1)} · Cap: ${r.capacity}</div>
+        <div class="room-name">${r.name}</div>
+        <div class="room-meta">Block ${r.block} · Floor ${r.floor} · ${r.building.charAt(0).toUpperCase()+r.building.slice(1)} Block</div>
+        <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+          <span style="font-size:0.75rem; color:var(--text-muted); flex-shrink:0;">Utilization</span>
+          <div class="progress-bar" style="flex:1;"><div class="progress-fill ${utilColor}" style="width:${r.util}%"></div></div>
+          <span style="font-size:0.75rem; font-weight:600; color:var(--${utilColor==='red'?'danger':utilColor==='blue'?'primary':'accent'})">${r.util}%</span>
+        </div>
+        ${r.slots.length > 0 || r.slotBusy.length > 0 ? `<div class="slots">${slotsHtml}</div>` : ''}
+      </div>
+      <div class="room-card-right">
+        <span class="badge ${isAvail ? 'badge-green' : 'badge-red'}">${isAvail ? '● Available' : '● Occupied'}</span>
+        ${isAvail ? `<div style="margin-top:10px;"><button class="btn btn-sm btn-primary" onclick="event.stopPropagation(); openModal('${r.id}','')">Book →</button></div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function applyFilters() {
+  const building = document.getElementById('filterBuilding').value;
+  const block = document.getElementById('filterBlock').value;
+  const floor = document.getElementById('filterFloor').value;
+  const type = document.getElementById('filterType').value;
+  const status = document.getElementById('filterStatus').value;
+  const cap = parseInt(document.getElementById('filterCap').value);
+  let filtered = rooms.filter(r => {
+    if (building !== 'all' && r.building !== building) return false;
+    if (block !== 'all' && r.block !== block) return false;
+    if (floor !== 'all' && r.floor !== floor) return false;
+    if (type !== 'all' && r.type !== type) return false;
+    if (status !== 'all' && r.status !== status) return false;
+    if (r.capacity < cap) return false;
+    return true;
+  });
+  renderRooms(filtered);
+}
+
+function resetFilters() {
+  ['filterBuilding','filterBlock','filterFloor','filterType','filterStatus','filterCap'].forEach(id => {
+    document.getElementById(id).selectedIndex = 0;
+  });
+  renderRooms(rooms);
+}
+
+function toggleView(v) { currentView = v; renderRooms(rooms); }
+
+function openModal(roomId, slotTime) {
+  const r = rooms.find(x => x.id === roomId);
+  if (!r) return;
+  selectedRoom = r;
+  document.getElementById('modalRoomName').textContent = r.name;
+  document.getElementById('modalRoomMeta').textContent = `Capacity: ${r.capacity} · Block ${r.block} · Floor ${r.floor}`;
+  document.getElementById('modalStatus').textContent = r.status === 'available' ? 'Available' : 'Occupied';
+  document.getElementById('modalStatus').style.color = r.status === 'available' ? 'var(--accent)' : 'var(--danger)';
+  document.getElementById('modalCapacity').textContent = `${r.capacity} seats`;
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('bookDate').value = today;
+  const storedName = localStorage.getItem('userName');
+  if (storedName) {
+    document.getElementById('bookName').value = storedName;
+  }
+  document.getElementById('bookingModal').classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('bookingModal').classList.remove('active');
+  // Reset purpose fields
+  document.getElementById('bookPurposeSelect').value = '';
+  document.getElementById('bookPurposeOther').style.display = 'none';
+  document.getElementById('bookPurposeOther').value = '';
+}
+
+function togglePurposeOther(val) {
+  const otherInput = document.getElementById('bookPurposeOther');
+  if (val === 'Other') {
+    otherInput.style.display = 'block';
+    otherInput.focus();
+  } else {
+    otherInput.style.display = 'none';
+    otherInput.value = '';
+  }
+}
+
+async function confirmBooking() {
+  const name = document.getElementById('bookName').value.trim();
+  const date = document.getElementById('bookDate').value;
+  const start = document.getElementById('bookStart').value;
+  const end = document.getElementById('bookEnd').value;
+  const purposeSel = document.getElementById('bookPurposeSelect').value;
+  const purposeOther = document.getElementById('bookPurposeOther').value.trim();
+  const purpose = purposeSel === 'Other' ? (purposeOther || 'Other') : (purposeSel || 'General Booking');
+  if (!purposeSel) { alert('Please select a purpose.'); return; }
+  if (purposeSel === 'Other' && !purposeOther) { alert('Please describe your purpose.'); return; }
+  if (!name) { alert('Please enter your name.'); return; }
+
+  // Disable button to prevent double submit
+  const btn = document.querySelector('#bookingModal .btn-primary');
+  if (btn) { btn.disabled = true; btn.textContent = 'Saving...'; }
+
+  const bookingTime = `${start} – ${end}`;
+  const bookingDateStr = date === now.toISOString().split('T')[0] ? 'Today' : date;
+
+  try {
+    // Check for clash
+    const clashSnap = await db.collection('bookings')
+      .where('roomId', '==', selectedRoom.id)
+      .where('date', '==', bookingDateStr)
+      .where('time', '==', bookingTime)
+      .where('status', 'in', ['pending', 'approved'])
+      .get();
+
+    if (!clashSnap.empty) {
+      const clashMsg = document.createElement('div');
+      clashMsg.style.cssText = 'background:#FEF2F2; color:#B91C1C; padding:12px; border-radius:8px; border:1px solid #FCA5A5; font-size:0.85rem; margin-top:15px; text-align:center;';
+      clashMsg.textContent = 'Slot is already booked sorry. Please manage the clash by choosing another time.';
+      const modalBody = document.querySelector('#bookingModal .modal-body');
+      if (modalBody) {
+        // Remove old clash messages if any
+        const old = modalBody.querySelector('.clash-error');
+        if (old) old.remove();
+        clashMsg.classList.add('clash-error');
+        modalBody.appendChild(clashMsg);
+      } else {
+        alert('Slot is already booked sorry. Please manage the clash.');
+      }
+      if (btn) { btn.disabled = false; btn.textContent = '✅ Confirm Booking'; }
+      return;
+    }
+
+    await db.collection('bookings').add(booking);
+    // Update active bookings counter
+    const bEl = document.getElementById('metricBookings');
+    if (bEl) bEl.textContent = parseInt(bEl.textContent) + 1;
+  } catch (err) {
+    console.error('Firestore error:', err);
+  }
+
+  if (btn) { btn.disabled = false; btn.textContent = '✅ Confirm Booking'; }
+  closeModal();
+  document.getElementById('successMsg').innerHTML =
+    `<strong>${selectedRoom.name}</strong> booked for <strong>${name}</strong><br>
+     ${date === now.toISOString().split('T')[0] ? 'Today' : date}, ${start} – ${end}<br>
+     <span style="font-size:0.84rem; color:var(--text-muted); display:inline-block; margin-top:8px;">A confirmation will be sent to your registered email.</span>`;
+  document.getElementById('successModal').classList.add('active');
+}
+function closeSuccess() { document.getElementById('successModal').classList.remove('active'); }
+
+// ===== TABS =====
+function showTab(tab, el) {
+  document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  ['spaces','analytics','parking'].forEach(t => {
+    document.getElementById('tab-'+t).style.display = t === tab ? 'block' : 'none';
+  });
+  if (tab === 'analytics') renderAnalytics();
+  if (tab === 'parking') renderParking();
+}
+
+// ===== LIVE COUNTERS =====
+function updateLive() {
+  const avail = rooms.filter(r => r.status === 'available').length;
+  const occ = rooms.filter(r => r.status === 'occupied').length;
+  document.getElementById('liveAvailable').textContent = avail;
+  document.getElementById('liveOccupied').textContent = occ;
+  document.getElementById('liveOccupancy').textContent = Math.round((occ/rooms.length)*100) + '%';
+  const now = new Date();
+  document.getElementById('lastUpdate').textContent = now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+}
+
+// ===== ANALYTICS =====
+function renderAnalytics() {
+  const hours = ['8AM','9AM','10AM','11AM','12PM','1PM','2PM','3PM','4PM','5PM'];
+  const values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  const chart = document.getElementById('hourlyChart');
+  const labels = document.getElementById('hourlyLabels');
+  chart.innerHTML = values.map((v,i) => {
+    return `<div class="chart-bar" style="height:${v}%; background:var(--accent);"><span>${v}%</span></div>`;
+  }).join('');
+  labels.innerHTML = hours.map(h => `<div class="chart-label">${h}</div>`).join('');
+
+  const types = [
+    { label:'Classrooms', val:0, color:'var(--primary)' },
+    { label:'Labs', val:0, color:'var(--danger)' },
+    { label:'Seminar Halls', val:0, color:'var(--warning)' },
+    { label:'Conference Rms', val:0, color:'var(--accent)' },
+    { label:'Study Rooms', val:0, color:'#8B5CF6' },
+  ];
+  document.getElementById('typeBreakdown').innerHTML = types.map(t =>
+    `<div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+        <span style="font-size:0.88rem; font-weight:500; color:var(--dark);">${t.label}</span>
+        <span style="font-size:0.88rem; font-weight:700; color:var(--dark);">${t.val}%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%; background:${t.color};"></div></div>
+    </div>`
+  ).join('');
+
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat'];
+  const fcast = [0, 0, 0, 0, 0, 0];
+  document.getElementById('forecastChart').innerHTML = fcast.map((v,i) => {
+    return `<div class="chart-bar" style="height:${v}%; background:var(--primary);"><span>${v}%</span></div>`;
+  }).join('');
+  document.getElementById('forecastLabels').innerHTML = days.map(d => `<div class="chart-label">${d}</div>`).join('');
+}
+
+// ===== PARKING =====
+const parkingData = [
+  ...Array.from({length:80}, (_,i) => ({id:`P-${i+1}`, status:'free'})),
+];
+
+function renderParking() {
+  const grid = document.getElementById('parkingGrid');
+  grid.innerHTML = parkingData.map((spot, idx) => {
+    const cls = spot.status === 'taken' ? 'taken' : spot.status === 'reserved' ? 'reserved' : 'free';
+    const label = spot.status === 'taken' ? '🚗' : spot.status === 'reserved' ? '🔒' : spot.id;
+    return `<div class="parking-spot ${cls}" title="${spot.id}" onclick="parkClick('${spot.id}','${spot.status}')">${label}</div>`;
+  }).join('');
+}
+
+function parkClick(id, status) {
+  if (status !== 'free') return;
+  selectedParkSpot = id;
+  document.getElementById('parkSpotName').textContent = `Spot ${id}`;
+  document.getElementById('parkingModal').classList.add('active');
+}
+function closeParkingModal() { document.getElementById('parkingModal').classList.remove('active'); }
+function confirmParking() {
+  const v = document.getElementById('vehicleNum').value.trim();
+  if (!v) { alert('Please enter your vehicle number.'); return; }
+  closeParkingModal();
+  document.getElementById('successMsg').textContent = `Parking spot ${selectedParkSpot} booked for ${v}. Please arrive within 30 minutes.`;
+  document.getElementById('successModal').classList.add('active');
+}
+
+// ===== INIT =====
+if (localStorage.getItem('userRole') === 'admin') {
+  window.location.href = 'admin.html';
+}
+
+function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+document.addEventListener('DOMContentLoaded', () => {
+  startSpacesListener();
+  // set today's date
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('bookDate').value = today;
+});
+</script>
+</body>
+</html>

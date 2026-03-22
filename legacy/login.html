@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login – CampusSpace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .auth-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .auth-card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+      width: 100%;
+      max-width: 420px;
+      padding: 40px;
+      border: 1px solid var(--border);
+    }
+    .auth-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .auth-header .logo-icon {
+      width: 48px; height: 48px;
+      background: var(--primary);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 1.5rem;
+      margin: 0 auto 16px;
+    }
+    .auth-header h1 {
+      font-size: 1.5rem;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .auth-header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .auth-footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .auth-footer a {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .tip-box {
+      background: var(--primary-light);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 24px;
+      font-size: 0.8rem;
+      color: var(--primary-dark);
+      border: 1px solid #dbeafe;
+    }
+    .tip-box strong { display: block; margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV (Simple for Auth) -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">🏢</div>
+        CampusSpace
+      </a>
+      <a href="index.html" style="font-size: 0.9rem; font-weight: 500; color: var(--text-muted);">← Back to Home</a>
+    </div>
+  </nav>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="logo-icon">🏢</div>
+        <h1>Welcome Back</h1>
+        <p>Log in to manage your spaces</p>
+      </div>
+
+      <div id="loginError" style="display: none; background: #FEF2F2; color: #B91C1C; padding: 12px; border-radius: 8px; border: 1px solid #FCA5A5; font-size: 0.85rem; margin-bottom: 20px; text-align: center;"></div>
+
+      <div class="tip-box">
+        <strong>💡 Demo Credentials:</strong>
+        Admin: admin@campusspace.com / admin123<br>
+        Student: student@campusspace.com / student123
+      </div>
+
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="name@institution.edu" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; cursor: pointer;">
+            <input type="checkbox" style="width: auto;"> Remember me
+          </label>
+          <a href="#" style="font-size: 0.85rem; color: var(--primary); font-weight: 500;">Forgot Password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Log In</button>
+      </form>
+
+      <div class="auth-footer">
+        Don't have an account? <a href="signup.html">Sign up</a>
+      </div>
+    </div>
+  </div>
+
+  <footer style="background: transparent; border-top: none;">
+    <div class="container" style="text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+      © 2026 CampusSpace. Secure Infrastructure Management.
+    </div>
+  </footer>
+
+  <script>
+    if (localStorage.getItem('userRole') === 'admin') {
+      window.location.href = 'admin.html';
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorDiv = document.getElementById('loginError');
+      errorDiv.style.display = 'none';
+
+      // 1. Check Hardcoded Demo Credentials
+      if (email === 'admin@campusspace.com' && password === 'admin123') {
+        localStorage.setItem('userRole', 'admin');
+        localStorage.setItem('userName', 'Admin');
+        window.location.href = 'admin.html';
+        return;
+      } 
+      
+      if (email === 'student@campusspace.com' && password === 'student123') {
+        localStorage.setItem('userRole', 'student');
+        localStorage.setItem('userName', 'Student');
+        window.location.href = 'demo.html';
+        return;
+      }
+
+      // 2. Check Dynamic Users (from Signup)
+      const users = JSON.parse(localStorage.getItem('campusUsers') || '[]');
+      const user = users.find(u => u.email === email && u.password === password);
+      
+      if (user) {
+        localStorage.setItem('userRole', user.role);
+        localStorage.setItem('userName', user.name);
+        window.location.href = 'demo.html';
+        return;
+      }
+
+      // 3. Fail
+      errorDiv.textContent = 'Incorrect details. Please try again or use the demo credentials.';
+      errorDiv.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
