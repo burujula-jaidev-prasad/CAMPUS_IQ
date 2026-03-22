@@ -43,7 +43,7 @@ const PublicRoute = ({ children }) => {
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      <Router basename="/CAMPUS_IQ">
         <Routes>
           <Route path="/" element={<PublicRoute><Layout><Home /></Layout></PublicRoute>} />
           <Route path="/login" element={<PublicRoute><Layout><Login /></Layout></PublicRoute>} />
