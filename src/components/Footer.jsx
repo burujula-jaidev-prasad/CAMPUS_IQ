@@ -8,8 +8,8 @@ const Footer = () => {
         <div className="footer-inner">
           <div className="footer-brand">
             <div className="nav-logo" style={{ color: 'white', gap: '0', display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
-              <div className="logo-icon" style={{ background: 'transparent', width: '250px', height: '100px' }}>
-                <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Campus IQ" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              <div className="logo-icon" style={{ background: 'transparent', height: '60px', display: 'flex', alignItems: 'center' }}>
+                <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Campus IQ" style={{ height: '100%', width: 'auto', objectFit: 'contain' }} />
               </div>
             </div>
             <p>Smart space management platform for universities, hospitals, and corporate campuses.</p>

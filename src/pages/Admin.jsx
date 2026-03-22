@@ -266,11 +266,11 @@ const Admin = () => {
     <div className="admin-wrap">
       {/* SIDEBAR */}
       <aside className="admin-sidebar">
-        <div className="sidebar-logo" style={{ marginBottom: '16px', padding: '0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div className="logo-icon" style={{ background: 'transparent', width: '260px', height: '250px', margin: '0' }}>
-            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Campus IQ" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+        <div className="sidebar-logo" style={{ marginBottom: '24px', padding: '0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div className="logo-icon" style={{ background: 'transparent', height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Campus IQ" style={{ height: '100%', width: 'auto', objectFit: 'contain' }} />
           </div>
-          <div style={{ marginTop: '-40px', textAlign: 'center' }}>
+          <div style={{ marginTop: '8px', textAlign: 'center' }}>
             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '1px' }}>Every Space Matter</span>
           </div>
         </div>
