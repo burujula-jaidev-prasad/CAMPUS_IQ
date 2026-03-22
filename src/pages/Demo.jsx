@@ -52,7 +52,7 @@ const Demo = () => {
   // Booking modal
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [bookingForm, setBookingForm] = useState({
-    name: user?.name || '',
+    name: user?.name || 'Guest',
     rollNumber: '',
     date: new Date().toISOString().split('T')[0],
     start: '10:00 AM',
@@ -73,8 +73,7 @@ const Demo = () => {
 
     const qBookings = query(
       collection(db, 'bookings'),
-      where('userName', '==', user?.name || ''),
-      orderBy('timestamp', 'desc')
+      where('userName', '==', user?.name || 'Guest')
     );
     const unsubBookings = onSnapshot(qBookings, (snap) => {
       setMyBookings(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
