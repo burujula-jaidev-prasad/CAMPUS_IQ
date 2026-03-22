@@ -21,6 +21,12 @@ const ROOM_ICONS = {
   study: '📚',
 };
 
+// Real campus photos mapped by room type
+const ROOM_PHOTOS = {
+  classroom: `${import.meta.env.BASE_URL}campus_classroom.jpg`,
+  study: `${import.meta.env.BASE_URL}campus_study_lounge.jpg`,
+};
+
 const TYPE_LABELS = {
   classroom: 'Classroom',
   lab: 'Computer Lab',
@@ -414,6 +420,41 @@ const Demo = () => {
                       e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.06)';
                     }}
                   >
+                    {/* Room Photo Banner */}
+                    {ROOM_PHOTOS[r.type] && (
+                      <div
+                        style={{
+                          width: '100%',
+                          height: '160px',
+                          overflow: 'hidden',
+                          position: 'relative',
+                          flexShrink: 0,
+                        }}
+                      >
+                        <img
+                          src={ROOM_PHOTOS[r.type]}
+                          alt={`${r.name} photo`}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                            display: 'block',
+                            transition: 'transform 0.4s ease',
+                          }}
+                          onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+                          onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                        />
+                        <div
+                          style={{
+                            position: 'absolute',
+                            inset: 0,
+                            background: 'linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.22) 100%)',
+                          }}
+                        />
+                      </div>
+                    )}
+
                     {/* Card Header */}
                     <div
                       style={{

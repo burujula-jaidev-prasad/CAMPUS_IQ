@@ -4,7 +4,9 @@ import {
   collection, 
   onSnapshot, 
   query, 
-  orderBy, 
+  orderBy,
+  where,
+  getDocs,
   updateDoc, 
   doc, 
   deleteDoc,
@@ -56,9 +58,30 @@ const Admin = () => {
     navigate('/login');
   };
 
+  // Helper: recompute util for a room based on today's approved bookings
+  const updateSpaceUtil = async (roomId) => {
+    try {
+      const todayStr = new Date().toISOString().split('T')[0]; // e.g. "2026-03-22"
+      // Bookings store date as 'Today' (if booked on today) or the ISO date string
+      const [snapToday, snapDateStr] = await Promise.all([
+        getDocs(query(collection(db, 'bookings'), where('roomId', '==', roomId), where('status', '==', 'approved'), where('date', '==', 'Today'))),
+        getDocs(query(collection(db, 'bookings'), where('roomId', '==', roomId), where('status', '==', 'approved'), where('date', '==', todayStr))),
+      ]);
+      const approvedCount = snapToday.size + snapDateStr.size;
+      // 10 time slots available per day; util = approved / 10 * 100, capped at 100
+      const util = Math.min(100, Math.round((approvedCount / 10) * 100));
+      await updateDoc(doc(db, 'spaces', roomId), { util });
+    } catch (err) {
+      console.error('Failed to update space util:', err);
+    }
+  };
+
   const approveBooking = async (id) => {
+    // Find the booking to get its roomId before updating
+    const booking = bookings.find((b) => b.id === id);
     try {
       await updateDoc(doc(db, 'bookings', id), { status: 'approved' });
+      if (booking?.roomId) await updateSpaceUtil(booking.roomId);
       showToast('✅ Booking approved!');
     } catch (err) {
       showToast('❌ Failed to approve');
@@ -66,8 +89,11 @@ const Admin = () => {
   };
 
   const rejectBooking = async (id) => {
+    const booking = bookings.find((b) => b.id === id);
     try {
       await updateDoc(doc(db, 'bookings', id), { status: 'rejected' });
+      // If the booking was previously approved, recalculate util
+      if (booking?.roomId) await updateSpaceUtil(booking.roomId);
       showToast('❌ Booking rejected');
     } catch (err) {
       showToast('❌ Failed to reject');
