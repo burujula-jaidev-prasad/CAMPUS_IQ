@@ -12,7 +12,6 @@ import {
 } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import Layout from '../components/Layout';
-import Chatbot from '../components/Chatbot';
 
 const ROOM_ICONS = {
   classroom: '🏫',
@@ -1178,8 +1177,7 @@ const Demo = () => {
           </div>
         </div>
       )}
-      {/* ── TANIA CHATBOT ── */}
-      <Chatbot rooms={rooms} />
+      {/* ── TANIA CHATBOT IS NOW IN LAYOUT ── */}
     </Layout>
   );
 };

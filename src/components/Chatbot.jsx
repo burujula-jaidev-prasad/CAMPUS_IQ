@@ -15,8 +15,9 @@ const ALL_SLOTS = [
 // Step 3: Ask which room they want slot info for
 // Step 4: Show available slots
 
-const Chatbot = ({ rooms }) => {
+const Chatbot = ({ rooms: initialRooms }) => {
   const { user } = useAuth();
+  const [rooms, setRooms] = useState(initialRooms || []);
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -25,6 +26,24 @@ const Chatbot = ({ rooms }) => {
   const [isTyping, setIsTyping] = useState(false);
   const [hasUnread, setHasUnread] = useState(true);
   const messagesEndRef = useRef(null);
+
+  // Fetch rooms if not provided
+  useEffect(() => {
+    if (!initialRooms || initialRooms.length === 0) {
+      const fetchRooms = async () => {
+        try {
+          const snap = await getDocs(collection(db, 'spaces'));
+          const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+          setRooms(data);
+        } catch (err) {
+          console.error("Error fetching rooms in Chatbot:", err);
+        }
+      };
+      fetchRooms();
+    } else {
+      setRooms(initialRooms);
+    }
+  }, [initialRooms]);
 
   const userName = user?.name || 'Friend';
 

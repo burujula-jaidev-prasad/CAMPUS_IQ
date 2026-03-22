@@ -612,7 +612,7 @@ footer {
 
 @media (max-width: 640px) {
   .nav-inner { height: 64px; }
-  .nav-logo .logo-icon { width: 140px !important; height: 44px !important; }
+  .nav-logo .logo-icon { height: 44px !important; }
   .nav-logo span { display: none; }
   .nav-links { display: none; flex-direction: column; gap: 4px; position: absolute; top: 64px; left: 0; right: 0; background: white; padding: 16px; border-bottom: 1px solid var(--border); box-shadow: var(--shadow); }
   .nav-links.open { display: flex; }
