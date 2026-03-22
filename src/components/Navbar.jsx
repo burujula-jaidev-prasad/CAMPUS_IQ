@@ -105,8 +105,8 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="nav-cta" onClick={() => setIsOpen(false)}>
-                  Request Demo
+                <Link to="/signup" className="nav-cta" onClick={() => setIsOpen(false)}>
+                  Get Started
                 </Link>
               </li>
             </>

@@ -12,27 +12,9 @@ const Home = () => {
             <h1>Maximize the Value of Your <span>Campus Infrastructure</span></h1>
             <p>Real-time visibility, booking, and analytics for space management that matters — built for universities, hospitals, and corporates.</p>
             <div className="hero-btns">
-              <Link to="/contact" className="btn btn-primary btn-lg">👉 Request Demo</Link>
-              <Link to="/demo" className="btn btn-outline btn-lg">See Live Demo</Link>
+              <Link to="/signup" className="btn btn-primary btn-lg">Get Started</Link>
             </div>
-            <div className="hero-stats">
-              <div className="hero-stat">
-                <strong>40%</strong>
-                <span>Higher space utilization</span>
-              </div>
-              <div className="hero-stat">
-                <strong>5000+</strong>
-                <span>Rooms managed</span>
-              </div>
-              <div className="hero-stat">
-                <strong>30 sec</strong>
-                <span>Booking time</span>
-              </div>
-              <div className="hero-stat">
-                <strong>12+</strong>
-                <span>Institutions</span>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>
@@ -205,7 +187,7 @@ const Home = () => {
             <h2>Ready to optimize your campus?</h2>
             <p>Join 12+ institutions already using Campus IQ to manage every space that matters.</p>
             <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link to="/contact" className="btn btn-lg" style={{ background: 'white', color: 'var(--primary)' }}>👉 Request Demo</Link>
+              <Link to="/signup" className="btn btn-primary btn-lg">Get Started</Link>
               <Link to="/business" className="btn btn-outline btn-lg">Learn How It Works</Link>
             </div>
           </div>
