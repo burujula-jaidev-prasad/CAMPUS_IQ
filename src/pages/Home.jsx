@@ -47,11 +47,11 @@ const Home = () => {
                 <span>Next-Gen Campus Space Management</span>
               </div>
               
-              <h1 className="mb-6 font-extrabold" style={{ marginBottom: '1.5rem', lineHeight: '1.1' }}>
+              <h1 className="mb-6 font-extrabold tracking-tight" style={{ marginBottom: '1.5rem', lineHeight: '1.05', fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}>
                 Optimize Your <span className="text-gradient">Campus Experience</span>
               </h1>
               
-              <p className="mb-10 text-lg leading-relaxed max-w-lg" style={{ marginBottom: '2.5rem', fontSize: '1.125rem', color: '#64748b', lineHeight: '1.625' }}>
+              <p className="mb-10 text-lg leading-relaxed opacity-80" style={{ marginBottom: '2.5rem', fontSize: '1.125rem', color: '#64748b', lineHeight: '1.6', maxWidth: '480px' }}>
                 The ultimate smart booking system for modern universities. 
                 Manage classrooms, labs, and study areas with real-time 
                 utilization insights and seamless scheduling.

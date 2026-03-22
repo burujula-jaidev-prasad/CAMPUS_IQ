@@ -7,12 +7,12 @@ const Footer = () => {
       <div className="container">
         <div className="footer-inner">
           <div className="footer-brand">
-            <div className="nav-logo" style={{ color: 'white', gap: '0', display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
-              <div className="logo-icon" style={{ background: 'transparent', height: '60px', display: 'flex', alignItems: 'center' }}>
-                <img src={`${import.meta.env.BASE_URL}logo_brand.png`} alt="Campus IQ" style={{ height: '100%', width: 'auto', objectFit: 'contain' }} />
+            <div className="nav-logo" style={{ color: 'white', gap: '12px', display: 'flex', alignItems: 'center', marginBottom: '1.5rem' }}>
+              <div className="logo-icon" style={{ height: '50px' }}>
+                <img src={`${import.meta.env.BASE_URL}logo_brand.png`} alt="Campus IQ" style={{ height: '100%', width: 'auto', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
               </div>
             </div>
-            <p>Smart space management platform for universities, hospitals, and corporate campuses.</p>
+            <p className="opacity-70 text-sm leading-relaxed">Smart space management platform for universities, hospitals, and corporate campuses.</p>
           </div>
           <div className="footer-col">
             <h4>Platform</h4>
