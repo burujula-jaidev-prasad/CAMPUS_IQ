@@ -40,8 +40,9 @@ const Demo = () => {
 
   // Data
   const [rooms, setRooms] = useState([]);
-  const [myBookings, setMyBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [guestName, setGuestName] = useState(localStorage.getItem('campus_iq_guest_name') || 'Guest');
+  const [myBookings, setMyBookings] = useState([]);
 
   // UI
   const [activeTab, setActiveTab] = useState('spaces'); // 'spaces' | 'history'
@@ -73,7 +74,7 @@ const Demo = () => {
 
     const qBookings = query(
       collection(db, 'bookings'),
-      where('userName', '==', user?.name || 'Guest')
+      where('userName', '==', user?.name || guestName)
     );
     const unsubBookings = onSnapshot(qBookings, (snap) => {
       setMyBookings(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
@@ -83,7 +84,7 @@ const Demo = () => {
       unsubSpaces();
       unsubBookings();
     };
-  }, [user]);
+  }, [user, guestName]);
 
   /* ── Filtered rooms ── */
   const filteredRooms = rooms.filter((r) => {
@@ -144,6 +145,11 @@ const Demo = () => {
         timestamp: serverTimestamp(),
       };
       await addDoc(collection(db, 'bookings'), bookingData);
+
+      if (!user) {
+        setGuestName(bookingForm.name);
+        localStorage.setItem('campus_iq_guest_name', bookingForm.name);
+      }
 
       setShowSuccess({ room: selectedRoom.name, time: bookingTime });
       setSelectedRoom(null);
