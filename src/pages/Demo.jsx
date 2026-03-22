@@ -53,6 +53,7 @@ const Demo = () => {
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [bookingForm, setBookingForm] = useState({
     name: user?.name || '',
+    rollNumber: '',
     date: new Date().toISOString().split('T')[0],
     start: '10:00 AM',
     end: '12:00 PM',
@@ -132,16 +133,18 @@ const Demo = () => {
         return;
       }
 
-      await addDoc(collection(db, 'bookings'), {
+      const bookingData = {
         roomId: selectedRoom.id,
         roomName: selectedRoom.name,
         userName: bookingForm.name,
+        rollNumber: bookingForm.rollNumber,
         date: bookingDate,
         time: bookingTime,
         purpose: finalPurpose,
         status: 'pending',
         timestamp: serverTimestamp(),
-      });
+      };
+      await addDoc(collection(db, 'bookings'), bookingData);
 
       setShowSuccess({ room: selectedRoom.name, time: bookingTime });
       setSelectedRoom(null);
@@ -924,6 +927,31 @@ const Demo = () => {
                   value={bookingForm.name}
                   onChange={(e) => setBookingForm({ ...bookingForm, name: e.target.value })}
                   required
+                  placeholder="e.g. John Doe"
+                  style={{
+                    width: '100%',
+                    padding: '10px 14px',
+                    border: '1.5px solid #E2E8F0',
+                    borderRadius: '10px',
+                    fontSize: '0.9rem',
+                    fontFamily: 'inherit',
+                    outline: 'none',
+                    boxSizing: 'border-box',
+                  }}
+                />
+              </div>
+
+              {/* Roll Number */}
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
+                  Roll Number
+                </label>
+                <input
+                  type="text"
+                  value={bookingForm.rollNumber}
+                  onChange={(e) => setBookingForm({ ...bookingForm, rollNumber: e.target.value })}
+                  required
+                  placeholder="e.g. 21CS001"
                   style={{
                     width: '100%',
                     padding: '10px 14px',

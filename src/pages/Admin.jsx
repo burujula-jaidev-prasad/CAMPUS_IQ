@@ -160,12 +160,13 @@ const Admin = () => {
           <div className="panel-header"><h2>⏳ Pending Approvals</h2></div>
           <div className="panel-body" style={{ padding: 0 }}>
             <table className="admin-table">
-              <thead><tr><th>Room</th><th>Requested By</th><th>Time</th><th>Action</th></tr></thead>
+              <thead><tr><th>Room</th><th>Requested By</th><th>Roll Number</th><th>Time</th><th>Action</th></tr></thead>
               <tbody>
                 {pendingBookings.slice(0, 5).map(b => (
                   <tr key={b.id}>
                     <td style={{ fontWeight: 600 }}>{b.roomName}</td>
                     <td>{b.userName}</td>
+                    <td style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--primary)' }}>{b.rollNumber || 'N/A'}</td>
                     <td style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>{b.time}</td>
                     <td style={{ display: 'flex', gap: '8px' }}>
                       <button className="action-btn approve" onClick={() => approveBooking(b.id)}><span>✓</span> Approve</button>
@@ -174,7 +175,7 @@ const Admin = () => {
                   </tr>
                 ))}
                 {pendingBookings.length === 0 && (
-                  <tr><td colSpan="4" style={{ textAlign: 'center', padding: '20px', color: 'var(--text-muted)' }}>No pending approvals</td></tr>
+                  <tr><td colSpan="5" style={{ textAlign: 'center', padding: '20px', color: 'var(--text-muted)' }}>No pending approvals</td></tr>
                 )}
               </tbody>
             </table>
@@ -216,13 +217,14 @@ const Admin = () => {
         <div className="panel-body" style={{ padding: 0, overflowX: 'auto' }}>
           <table className="admin-table">
             <thead>
-              <tr><th>Room</th><th>Requested By</th><th>Date & Time</th><th>Status</th><th>Actions</th></tr>
+              <tr><th>Room</th><th>Requested By</th><th>Roll Number</th><th>Date & Time</th><th>Status</th><th>Actions</th></tr>
             </thead>
             <tbody>
               {bookings.map(b => (
                 <tr key={b.id}>
                   <td style={{ fontWeight: 600 }}>{b.roomName}</td>
                   <td>{b.userName}</td>
+                  <td style={{ fontWeight: 500 }}>{b.rollNumber || 'N/A'}</td>
                   <td>{b.date}<div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{b.time}</div></td>
                   <td><span className={`pill ${b.status}`}>{b.status === 'approved' ? 'accepted' : b.status}</span></td>
                   <td style={{ display: 'flex', gap: '8px' }}>
