@@ -25,11 +25,14 @@ const Navbar = () => {
   return (
     <nav>
       <div className="container nav-inner">
-        <Link to="/" className="nav-logo" style={{ gap: '12px', display: 'flex', alignItems: 'center' }}>
-          <div className="logo-icon" style={{ background: 'transparent', height: '54px', display: 'flex', alignItems: 'center' }}>
-            <img src={`${import.meta.env.BASE_URL}logo_brand.png`} alt="Campus IQ" style={{ height: '100%', width: 'auto', objectFit: 'contain' }} />
+        <Link to="/" className="nav-logo" style={{ gap: '16px', display: 'flex', alignItems: 'center' }}>
+          <div className="logo-icon w-auto h-12 flex items-center justify-center p-1 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20">
+            <img src={`${import.meta.env.BASE_URL}logo_brand.png`} alt="Campus IQ" className="h-full w-auto object-contain" />
           </div>
-          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', whiteSpace: 'nowrap' }}>Every Space Matter</span>
+          <div className="flex flex-col">
+            <span className="text-xl font-black text-indigo-900 tracking-tight leading-none uppercase">Campus IQ</span>
+            <span className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] mt-1">Every Space Matter</span>
+          </div>
         </Link>
 
         <ul className={`nav-links ${isOpen ? 'open' : ''}`}>

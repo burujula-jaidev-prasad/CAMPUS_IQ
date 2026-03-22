@@ -176,7 +176,7 @@ const Demo = () => {
                 <span className="badge badge-green animate-pulse">● LIVE</span>
               </div>
               <p className="text-white/60 text-sm flex items-center gap-2">
-                <MapPin size={14} /> Bangalore Main Campus · {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                <MapPin size={14} /> Lavasa Campus, Pune · {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </p>
             </motion.div>
             <div className="flex gap-8 md:gap-12">

@@ -22,7 +22,7 @@ const Contact = () => {
               
               <div className="space-y-8">
                 {[
-                  { icon: <MapPin />, title: 'Visit Us', desc: '123 Innovation Drive, Bangalore' },
+                  { icon: <MapPin />, title: 'Visit Us', desc: 'Christ University, Lavasa Campus, Pune' },
                   { icon: <Mail />, title: 'Email Us', desc: 'hello@campusspace.com' }
                 ].map((item, i) => (
                   <div key={item.title} className="flex gap-6 items-center">
